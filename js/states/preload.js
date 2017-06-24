@@ -18,7 +18,7 @@ var PreloadState = {
         
         this.game.load.atlasXML('items', 'assets/spritesheet_items.png', 'assets/spritesheet_items.xml');
 
-        //this.game.load.spritesheet("items","assets/spritesheet_items.png",128,128)
+        this.game.load.image("environment","assets/Environment.png");
         
         
     },

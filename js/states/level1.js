@@ -37,6 +37,7 @@ var Level1 = {
         //join the tiles
         this.map.addTilesetImage("tileset","gameTiles");
         this.map.addTilesetImage("spritesheet_tiles","minecraftTiles")
+        this.map.addTilesetImage("Environment","environment")
         
         //collision layer
         this.map.setCollisionBetween(250,350,true,"collisionLayer")

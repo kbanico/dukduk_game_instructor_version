@@ -12,13 +12,17 @@ var PreloadState = {
         this.game.load.image("gameTiles","assets/tileset.png");
         this.game.load.image("minecraftTiles","assets/spritesheet_tiles.png");
         
-        this.game.load.audio("drill","assets/sounds/drill.ogg");
-        
         this.game.load.image("crab","assets/crab.png");
         
         this.game.load.atlasXML('items', 'assets/spritesheet_items.png', 'assets/spritesheet_items.xml');
 
         this.game.load.image("environment","assets/Environment.png");
+        this.game.load.image("hut","assets/hut.png")
+        
+        //sounds
+          
+        this.game.load.audio("drill","assets/sounds/drill.ogg");
+        this.game.load.audio("oh_yeah","assets/sounds/oh_yeah.ogg");
         
         
     },

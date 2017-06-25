@@ -19,6 +19,8 @@ var PreloadState = {
         this.game.load.image("environment","assets/Environment.png");
         this.game.load.image("hut","assets/hut.png")
         
+        this.game.load.image("goodjob","assets/goodjob.png")
+        
         //sounds
           
         this.game.load.audio("drill","assets/sounds/drill.ogg");

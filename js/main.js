@@ -78,4 +78,5 @@ var game = new Phaser.Game(dim.x,dim.y, Phaser.AUTO);
 game.state.add("Boot", BootState);
 game.state.add("Preload", PreloadState);
 game.state.add("Level1", Level1)
+game.state.add("Level2", Level2)
 game.state.start("Boot")

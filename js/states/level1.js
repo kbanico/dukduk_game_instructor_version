@@ -171,15 +171,25 @@ var Level1 = {
         }
     },
     showCrab:function(player,hut){
-        hut.body.enable = false
         
-        if(this.crabLeftOver == 4){
+        
+        if(this.crabLeftOver == 0){
+            hut.body.enable = false
             console.log("YOYOYO")
             for(var i = 0; i < 5; i++){
                 var crab = this.game.add.sprite((i  * 50) + hut.x*0.8,hut.y,"crab");
-                crab.scale.setTo(0.5)
-                                                
+                crab.scale.setTo(0.5);
+                crab.alpha = 0;
+                var tween = game.add.tween(crab).to({alpha: 1},250,"Linear",false, i * 250).to({y: crab.y - 20},i * 250).start();
+                this.crabLeftOverText.text = ""
             }
+            tween.onComplete.add(function(){
+                this.swingAxe.stop();
+                var goodJobSprite = game.add.sprite(this.player.x,this.player.y,"goodjob")
+                this.player.body.enable = false;
+                
+                game.time.events.add(2000,function(){this.game.state.start("Level2")},this)
+            },this)
         }
     }
 //    render:function(){

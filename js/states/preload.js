@@ -29,6 +29,6 @@ var PreloadState = {
         
     },
     create:function(){
-        this.game.state.start("Level1");
+        this.game.state.start("Level2");
     }
 }

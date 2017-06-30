@@ -217,11 +217,12 @@ var Level1 = {
     },
     getRandy:function(a){
         var randy = a[Math.floor(Math.random()*a.length)];
-        if(!this.inArr(this.gen_num,randy)){
-            this.gen_num.push(randy);
-            return randy;
+        if(randy != lastly){
+            lastly = randy;
+            return randy
+        }else{
+            this.getRandy(a);
         }
-        return this.getRandy(a);
     },
 //    render:function(){
 //        game.debug.body(this.player)
@@ -230,3 +231,5 @@ var Level1 = {
 //        },this)
 //    }
 }
+
+var lastly = -1

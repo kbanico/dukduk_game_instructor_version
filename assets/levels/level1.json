@@ -1,12 +1,12 @@
 { "height":15,
  "layers":[
         {
-         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 353, 0, 0, 0, 0, 0, 0, 353, 0, 0, 0, 0, 272, 266, 283, 265, 266, 0, 287, 283, 290, 283, 258, 258, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+         "data":[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 353, 0, 0, 0, 0, 0, 353, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 353, 0, 0, 0, 0, 353, 0, 0, 0, 272, 266, 283, 265, 266, 0, 287, 283, 290, 283, 258, 258, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
          "height":15,
          "name":"backgroundLayer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":12,
          "x":0,
          "y":0
@@ -17,7 +17,7 @@
          "name":"collisionLayer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":true,
+         "visible":false,
          "width":12,
          "x":0,
          "y":0
@@ -165,6 +165,146 @@
                  "width":128,
                  "x":30.2873,
                  "y":893.174
+                }, 
+                {
+                 "gid":17,
+                 "height":64,
+                 "id":15,
+                 "name":"",
+                 "properties":
+                    {
+                     "type":"crab"
+                    },
+                 "propertytypes":
+                    {
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":432.43412368614,
+                 "y":1300.19261794182
+                }, 
+                {
+                 "gid":17,
+                 "height":64,
+                 "id":16,
+                 "name":"",
+                 "properties":
+                    {
+                     "type":"crab"
+                    },
+                 "propertytypes":
+                    {
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":970.199951112197,
+                 "y":1224.41652407724
+                }, 
+                {
+                 "gid":17,
+                 "height":64,
+                 "id":17,
+                 "name":"",
+                 "properties":
+                    {
+                     "type":"crab"
+                    },
+                 "propertytypes":
+                    {
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":642.651674407235,
+                 "y":1485.96626741628
+                }, 
+                {
+                 "gid":17,
+                 "height":64,
+                 "id":18,
+                 "name":"",
+                 "properties":
+                    {
+                     "type":"crab"
+                    },
+                 "propertytypes":
+                    {
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":156.21803959912,
+                 "y":1072.86433634808
+                }, 
+                {
+                 "gid":17,
+                 "height":64,
+                 "id":19,
+                 "name":"",
+                 "properties":
+                    {
+                     "type":"crab"
+                    },
+                 "propertytypes":
+                    {
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":1341.74725006111,
+                 "y":1432.18968467367
+                }, 
+                {
+                 "gid":17,
+                 "height":64,
+                 "id":20,
+                 "name":"",
+                 "properties":
+                    {
+                     "type":"crab"
+                    },
+                 "propertytypes":
+                    {
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":1319.74773893913,
+                 "y":1038.64287460279
+                }, 
+                {
+                 "gid":17,
+                 "height":64,
+                 "id":21,
+                 "name":"",
+                 "properties":
+                    {
+                     "type":"crab"
+                    },
+                 "propertytypes":
+                    {
+                     "type":"string"
+                    },
+                 "rotation":0,
+                 "type":"",
+                 "visible":true,
+                 "width":64,
+                 "x":542.431679296016,
+                 "y":1023.9765338548
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -172,7 +312,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":15,
+ "nextobjectid":22,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.0.1",
@@ -225,7 +365,7 @@
          "imagewidth":512,
          "margin":0,
          "name":"Environment",
-         "spacing":0,
+         "spacing":2,
          "tilecount":1,
          "tileheight":512,
          "tilewidth":512

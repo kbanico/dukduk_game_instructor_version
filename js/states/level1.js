@@ -74,10 +74,20 @@ var Level1 = {
         
         //crab group
         this.crabs = game.add.group();
+        //box
+        this.gen_num = [];
+        this.nums = [0,1,2,3,4]
+   
+        
         this.crabsData.forEach(function(element){
             var crab = this.game.add.sprite(element.x + 10,element.y + 20,"crab")
-            crab.scale.x = scaleRatio;
-            crab.scale.y = scaleRatio;
+            var randomCrab = this.getRandy(this.nums);
+            crab.frame = randomCrab
+            
+            
+            crab.scale.x = scaleRatio * .5;
+            crab.scale.y = scaleRatio * .5;
+            crab.frame = randomCrab
             
             var crabTween = this.game.add.tween(crab).to({x:crab.x + 40},1000,"Linear",true,0,-1);
             crabTween.yoyo(true,0)
@@ -100,7 +110,11 @@ var Level1 = {
         this.hut = this.game.add.sprite(this.game.world.x +1200,this.game.world.centerY-340,"hut")
         this.hut.scale.setTo(scaleRatio);
         this.game.physics.arcade.enable(this.hut)
-        this.hut.body.allowGravity = false
+        this.hut.body.allowGravity = false;
+        
+        
+        //color = brown, pink, red, blue, green
+        this.colorToBePicked = Math.floor(Math.random() * 5)
         
         
         //front group
@@ -191,7 +205,24 @@ var Level1 = {
                 game.time.events.add(2000,function(){this.game.state.start("Level2")},this)
             },this)
         }
-    }
+    },
+    inArr:function(a,e){
+        for(var i = 0; i < a.length; i++){
+            if(a[i] == e){
+                return true;
+            }
+        }
+        return false;
+        
+    },
+    getRandy:function(a){
+        var randy = a[Math.floor(Math.random()*a.length)];
+        if(!this.inArr(this.gen_num,randy)){
+            this.gen_num.push(randy);
+            return randy;
+        }
+        return this.getRandy(a);
+    },
 //    render:function(){
 //        game.debug.body(this.player)
 //        this.crabs.forEach(function(element){

@@ -6,13 +6,14 @@ var PreloadState = {
         this.load.setPreloadSprite(this.preloadBar);
         
         this.game.load.spritesheet("player","assets/player.png",130,170);
+        this.game.load.spritesheet("crab","assets/crab_spritesheet.png",400,348)
         
         //load tilemap image
         this.game.load.tilemap("level1","assets/levels/level1.json",null,Phaser.Tilemap.TILED_JSON)
         this.game.load.image("gameTiles","assets/tileset.png");
         this.game.load.image("minecraftTiles","assets/spritesheet_tiles.png");
         
-        this.game.load.image("crab","assets/crab.png");
+        //this.game.load.image("crab","assets/crab.png");
         
         this.game.load.atlasXML('items', 'assets/spritesheet_items.png', 'assets/spritesheet_items.xml');
 
@@ -29,6 +30,6 @@ var PreloadState = {
         
     },
     create:function(){
-        this.game.state.start("Level2");
+        this.game.state.start("Level1");
     }
 }

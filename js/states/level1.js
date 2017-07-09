@@ -17,8 +17,11 @@ var Level1 = {
         
         //crab left over
         this.crabLeftOver = 5;
-        this.crabLeftOverText = this.game.add.text(20,20,"Find " + this.crabLeftOver + " duk duk crabs",{font: "30px Arial", fill: "#fff"});
+        this.crabLeftOverText = this.game.add.text(20,20,"Find " + this.crabColor+ " duk duk crabs",{font: "30px Arial", fill: "#fff"});
         this.crabLeftOverText.fixedToCamera = true;
+        
+        
+       
         
         
     },
@@ -54,7 +57,7 @@ var Level1 = {
         //add player
         var playerData = findObjectsByType("player",this.map,"objectsLayer");
         this.player = game.add.sprite(playerData[0].x,playerData[0].y,"player");
-        this.player.scale.setTo(scaleRatio,scaleRatio)
+        this.player.scale.setTo(.5,.5)
         this.player.anchor.setTo(0.5);
         this.game.physics.arcade.enable(this.player);
         this.player.body.collideWorldBounds = true;
@@ -67,7 +70,18 @@ var Level1 = {
         
         //load sounds
         this.drill = game.add.audio("drill");
+        this.drill.volume = 0.2;
         this.oh_yeah = game.add.audio("oh_yeah")
+        this.blue = game.add.audio("blue")
+        this.blue.volume = 3;
+        this.brown = game.add.audio("brown")
+        this.brown.volume = 3;
+        this.green = game.add.audio("green")
+        this.green.volume = 3;
+        this.red = game.add.audio("red")
+//        this.red.volume = 3;
+        this.pink = game.add.audio("pink")
+        this.pink.volume = 3;
         
         //add the crabs
         this.crabsData = findObjectsByType("crab",this.map,"objectsLayer");
@@ -80,14 +94,13 @@ var Level1 = {
    
         
         this.crabsData.forEach(function(element){
+            
             var crab = this.game.add.sprite(element.x + 10,element.y + 20,"crab")
-            var randomCrab = this.getRandy(this.nums);
-            crab.frame = randomCrab
+            crab.frame = element.properties.frame
             
             
-            crab.scale.x = scaleRatio * .5;
-            crab.scale.y = scaleRatio * .5;
-            crab.frame = randomCrab
+            crab.scale.x =  .2;
+            crab.scale.y =  .2;
             
             var crabTween = this.game.add.tween(crab).to({x:crab.x + 40},1000,"Linear",true,0,-1);
             crabTween.yoyo(true,0)
@@ -99,8 +112,8 @@ var Level1 = {
         //add the pickaxe
         this.pickaxeData = findObjectsByType("pickaxe",this.map,"objectsLayer");
         this.pickaxe = this.game.add.sprite(this.pickaxeData[0].x+40,this.pickaxeData[0].y+50,"items","pick_gold.png")
-        this.pickaxe.scale.x=scaleRatio;
-        this.pickaxe.scale.y=scaleRatio;
+        this.pickaxe.scale.x=.5;
+        this.pickaxe.scale.y=.5;
         this.game.physics.arcade.enable(this.pickaxe);
         this.pickaxe.body.allowGravity = false;
         this.swingAxe = game.add.tween(this.pickaxe).to({angle: 50}, 300, Phaser.Easing.Sinusoidal.InOut, false, 0, Infinity, true);
@@ -108,14 +121,25 @@ var Level1 = {
         
         //add the hut
         this.hut = this.game.add.sprite(this.game.world.x +1200,this.game.world.centerY-340,"hut")
-        this.hut.scale.setTo(scaleRatio);
+        this.hut.scale.setTo(.45);
         this.game.physics.arcade.enable(this.hut)
         this.hut.body.allowGravity = false;
         
         
         //color = brown, pink, red, blue, green
         this.colorToBePicked = Math.floor(Math.random() * 5)
-        
+         //crab type
+        if(this.colorToBePicked == 0){
+            this.crabColor = "brown"
+        }else if(this.colorToBePicked == 1){
+            this.crabColor = "pink"
+        }else if(this.colorToBePicked == 2){
+            this.crabColor = "red"
+        }else if(this.colorToBePicked == 3){
+            this.crabColor = "blue";
+        }else{
+            this.crabColor = "green";
+        }
         
         //front group
         this.frontGroup = this.game.add.group()
@@ -151,6 +175,7 @@ var Level1 = {
             //block.collideDown = false;
             //block.collideLeft = false;
             //block.collideRight = false;
+            
             this.drill.play()
 
         }
@@ -161,12 +186,12 @@ var Level1 = {
         pickaxe.y = player.y;
         
         if(player.facingLeft){
-            pickaxe.scale.setTo(scaleRatio * -1,scaleRatio)
+            pickaxe.scale.setTo(.5 * -1,.5)
             pickaxe.x = player.x-10;
             pickaxe.y = player.y;
         }
         if(player.facingRight){
-            pickaxe.scale.setTo(scaleRatio,scaleRatio) 
+            pickaxe.scale.setTo(.5,.5) 
             pickaxe.x = player.x+10;
             pickaxe.y = player.y;   
         }
@@ -174,13 +199,50 @@ var Level1 = {
       
     },
     pickedUpCrab:function(player,crab){
-        this.oh_yeah.play();
-        crab.kill();
-        this.crabLeftOver-=1;
+        
+        if(crab.frame == 4 && this.colorToBePicked == 4){
+            this.green.play();
+            crab.kill();
+            this.crabLeftOver-=1;
+        }else{
+            console.log("NOPE WRONG")
+        }
+        if(crab.frame == 3 && this.colorToBePicked == 3){
+            this.blue.play();
+            crab.kill();
+            this.crabLeftOver-=1;
+        }else{
+            console.log("NOPE WRONG")
+        }
+        if(crab.frame == 2 && this.colorToBePicked == 2){
+            this.red.play();
+            crab.kill();
+            this.crabLeftOver-=1;
+        }else{
+            console.log("NOPE WRONG")
+        }
+        if(crab.frame == 1 && this.colorToBePicked == 1){
+            this.pink.play();
+            crab.kill();
+            this.crabLeftOver-=1;
+        }else{
+            console.log("NOPE WRONG")
+        }
+        if(crab.frame == 0 && this.colorToBePicked == 0){
+            this.brown.play();
+            crab.kill();
+            this.crabLeftOver-=1;
+        }else{
+            console.log("NOPE WRONG")
+        }
+        
+        
+        
         if(this.crabLeftOver == 0){
             this.crabLeftOverText.text = "Awesome Head To The House"
         }else{
-            this.crabLeftOverText.text = "Find " + this.crabLeftOver + " more"
+//            this.crabLeftOverText.text = "Find " + this.crabLeftOver + " " + this.crabColor 
+            this.crabLeftOverText.text = "Find " + this.crabLeftOver + " " + this.crabColor+ " duk duk crabs"
 
         }
     },
@@ -192,8 +254,9 @@ var Level1 = {
             console.log("YOYOYO")
             for(var i = 0; i < 5; i++){
                 var crab = this.game.add.sprite((i  * 50) + hut.x*0.8,hut.y,"crab");
-                crab.scale.setTo(0.5);
+                crab.scale.setTo(0.2);
                 crab.alpha = 0;
+                crab.frame = this.colorToBePicked;
                 var tween = game.add.tween(crab).to({alpha: 1},250,"Linear",false, i * 250).to({y: crab.y - 20},i * 250).start();
                 this.crabLeftOverText.text = ""
             }
@@ -206,15 +269,7 @@ var Level1 = {
             },this)
         }
     },
-    inArr:function(a,e){
-        for(var i = 0; i < a.length; i++){
-            if(a[i] == e){
-                return true;
-            }
-        }
-        return false;
-        
-    },
+  
     getRandy:function(a){
         var randy = a[Math.floor(Math.random()*a.length)];
         if(randy != lastly){

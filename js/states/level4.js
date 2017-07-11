@@ -57,7 +57,7 @@ Level4 = {
         if(this.spider.alive){
             this.chance = game.rnd.integerInRange(1,10)
             var tween1 = this.game.add.tween(this.spider)
-            if(this.chance > 1 ){
+            if(this.chance > 1 && this.huts.forEachAlive.length != 0){
                 
 
                 this.house = this.getRandomFirstAlive(this.huts)
@@ -66,6 +66,14 @@ Level4 = {
                 this.xPos = this.house.x
                 tween1.to({x:this.xPos,y:this.yPos},game.rnd.integerInRange(1,3) * 1000)
                 tween1.start()
+                tween1.onComplete.addOnce(function(){
+                    
+                    this.house.x = game.rnd.integerInRange(this.spider.x - 300, this.spider.x -500)
+                    this.house.y = this.spider.y - 300
+                    this.spider.addChild(this.house)
+                    tween1.to({y:0}).start();
+                   
+                },this)
             }else{
                 tween2 = this.game.add.tween(this.spider)
                 for(var i = 0; i < 3; i++){
@@ -75,6 +83,7 @@ Level4 = {
                     tween2.to({x:game.rnd.integerInRange(0,game.width-(this.spider.width / 2)),y:100},randomTime)
                 }
                 tween2.start();
+                
             }
         }
             

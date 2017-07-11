@@ -185,7 +185,9 @@ var Level3={
         var life = this.heartGroup.getFirstAlive()
         if(life !==null){
             life.kill()
-            baddy.x+=100;
+//            baddy.x+=game.rnd.integerInRange(-300,300);
+//            baddy.y+=game.rnd.integerInRange(-300,300);
+            baddy.kill()
         }else{
             player.kill();
             this.game.time.events.add(1500,function(){

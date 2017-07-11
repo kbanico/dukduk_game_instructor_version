@@ -30,6 +30,7 @@ var PreloadState = {
         this.game.load.image("goodjob","assets/goodjob.png")
         this.game.load.image("baddie","assets/bad_guy.png")
         this.game.load.image("heart","assets/heart.png")
+        this.game.load.spritesheet("spider","assets/spider1.png",605,650)
     
          //sounds
           
@@ -45,6 +46,6 @@ var PreloadState = {
         
     },
     create:function(){
-        this.game.state.start("Level3");
+        this.game.state.start("Level4");
     }
 }

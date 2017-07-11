@@ -5,7 +5,7 @@ Level4 = {
     create:function(){
          
 
-        this.background = this.game.stage.backgroundColor = "#5DA5DB"
+        this.background = this.game.stage.backgroundColor = '#f0fffd'
         this.spider = this.game.add.sprite(100,100,"spider")
         this.spider.scale.setTo(0.3)
         this.spider.anchor.setTo(0.5)
@@ -38,25 +38,28 @@ Level4 = {
         
         
         //add the player
-        this.player = game.add.sprite(game.world.centerX,game.world.height - 50,"player")
+        this.player = game.add.sprite(game.world.centerX,game.world.height - 20,"player")
         this.player.scale.setTo(0.3);
+        this.player.anchor.setTo(0.5)
+        this.game.physics.arcade.enable(this.player)
+        this.player.body.allowGravity = false;
+        this.player.body.collideWorldBounds = true;
+        this.player.animations.add("walking",[0,1,2],10,true)
         
+        
+        
+        //cursor
+        this.cursors = game.input.keyboard.createCursorKeys();
+        
+        //bullets
+        this.bullets = this.game.add.group();
+        this.bullets.enableBody = true;
+        this.nextBullet = 0;
+        
+        this.fireBullet();
 
         
     },update:function(){
-//        if(this.spider.alive){
-//             var randomTime = Math.floor(Math.random() * 3) * Math.floor(Math.random()) *1000
-//             console.log(randomTime)
-////            tween2.to({y:game.rnd.integerInRange(50,400)},randomTime)
-////            tween2.to({x:game.width-(this.spider.width / 2)})
-////            tween2.to({x:game.rnd.integerInRange(0,game.width-(this.spider.width / 2)),y:100})
-//            tween2.to({y:game.rnd.integerInRange(50,400)},randomTime)
-//            tween2.to({x:game.rnd.integerInRange(0,game.width-(this.spider.width / 2))},randomTime)
-//            tween2.to({x:game.rnd.integerInRange(0,game.width-(this.spider.width / 2)),y:100},randomTime)
-//            tween2.start();
-//        }
-        
-        
         //check the count of alive huts
         this.countAlive = 0
         this.huts.forEach(function(e){
@@ -64,11 +67,30 @@ Level4 = {
                 this.countAlive++
             }
         },this)
-//        if(this.countAlive == this.huts.length){
-//            game.time.events.add(3000,function(){game.state.restart();})
-//        }
-    
+        
+        //moving player
+        
+        this.player.body.velocity.x = 0;
+        if(this.cursors.right.isDown){
+            this.player.body.velocity.x = 300;
+            this.player.scale.setTo(0.3)
+            this.player.animations.play("walking")
+        }
+        else if(this.cursors.left.isDown){
+            this.player.body.velocity.x = -300
+            this.player.scale.setTo(-0.3,0.3)
+            this.player.animations.play("walking")
+        }else{
+            this.player.animations.stop()
+        }
+        
+        //the bullet
+        if(this.cursors.up.isDown && this.game.time.now > this.nextBullet){
+            this.nextBullet = this.game.time.now + 200
+            this.fireBullet();
+        }
 
+    
     },
     
     performTween:function(){
@@ -128,23 +150,31 @@ Level4 = {
             }
             
         },this)
-           
-        /*//randomize it
-        for(var i = arr.length - 1; i > 0; i--){
-            random = Math.floor(Math.random() * arr.length)
-            temp = arr[i]
-            arr[i] = arr[random]
-            arr[random] = temp
-        }*/
-        //console.log(arr[0].x)
+      
         random = Math.floor(Math.random() * arr.length)
         return arr[random]
     },
-
+    
+    fireBullet:function(){
+        var bullet = this.bullets.getFirstDead();
+        if(!bullet){
+            bullet = this.game.add.sprite(this.player.x-20,this.player.y-this.player.height,"items","ore_gold.png")
+        }else{
+            bullet.reset(this.player.x,this.player.y-this.player.height)
+        }
+        this.bullets.add(bullet)
+        bullet.body.allowGravity = false
+        bullet.scale.setTo(0.5);
+        bullet.body.velocity.y = -700;
+        // Kill the bullet when out of the world
+        bullet.checkWorldBounds = true; 
+        bullet.outOfBoundsKill = true;
+        
+    },
     render:function(){
         this.game.debug.body(this.house1)
         this.game.debug.body(this.house2)
         this.game.debug.body(this.spider)
 
-}
+    }
 }

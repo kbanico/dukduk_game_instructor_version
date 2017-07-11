@@ -98,12 +98,11 @@ Level4 = {
                     game.time.events.add(3000,function(){game.state.restart();})
                 },this)
                 
-                console.log("You lose no more house")
+                
             }
             else{
                 tween2 = this.game.add.tween(this.spider)
                 for(var i = 0; i < 3; i++){
-                    console.log(i)
                     tween2.to({y:game.rnd.integerInRange(50,400)},randomTime)
                     tween2.to({x:game.rnd.integerInRange(0,game.width-(this.spider.width / 2))},randomTime)
                     tween2.to({x:game.rnd.integerInRange(0,game.width-(this.spider.width / 2)),y:100},randomTime)
@@ -118,7 +117,6 @@ Level4 = {
        getRandomFirstAlive:function(group){
         var arr = [];
         group.children.forEach(function(element){
-            console.log("in the get random functin " + element)
             if(element.alive){
                 arr.push(element);
             }

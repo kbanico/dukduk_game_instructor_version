@@ -59,12 +59,12 @@ Level4 = {
             var tween1 = this.game.add.tween(this.spider)
             if(this.chance > 1 ){
                 
-                this.chanceHouse = game.rnd.integerInRange(0,2)
-                this.house = this.huts.children[this.chanceHouse]
+
+                this.house = this.getRandomFirstAlive(this.huts)
+                console.log(this.house + "is this.house")
                 this.yPos = this.house.y;
                 this.xPos = this.house.x
                 tween1.to({x:this.xPos,y:this.yPos},game.rnd.integerInRange(1,3) * 1000)
-                console.log("should start and get at house " + this.chanceHouse + " the house is " + this.huts.children[this.chanceHouse].x + " and y is " + this.huts.children[this.chanceHouse].y )
                 tween1.start()
             }else{
                 tween2 = this.game.add.tween(this.spider)
@@ -84,14 +84,17 @@ Level4 = {
         group.forEachAlive(function(element){
             arr.push(element);
         },this)
+           
+        /*//randomize it
         for(var i = arr.length - 1; i > 0; i--){
             random = Math.floor(Math.random() * arr.length)
             temp = arr[i]
             arr[i] = arr[random]
             arr[random] = temp
-        }
-        console.log(arr[0].x)
-        return arr
+        }*/
+        //console.log(arr[0].x)
+        random = Math.floor(Math.random() * group.length)
+        return arr[random]
     },
     render:function(){
         this.game.debug.body(this.house1)

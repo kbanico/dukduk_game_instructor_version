@@ -34,7 +34,13 @@ Level4 = {
         this.huts.setAll("body.allowGravity",false)
         
         this.performTween()
-        this.getRandomFirstAlive(this.huts)
+        this.getRandomFirstAlive(this.huts);
+        
+        
+        //add the player
+        this.player = game.add.sprite(game.world.centerX,game.world.height - 50,"player")
+        this.player.scale.setTo(0.3);
+        
 
         
     },update:function(){
@@ -70,7 +76,7 @@ Level4 = {
         if(this.spider.alive){
             this.chance = game.rnd.integerInRange(1,10)
             var tween1 = this.game.add.tween(this.spider)
-            if(this.chance > 0 && this.getRandomFirstAlive(this.huts) != undefined){
+            if(this.chance <=2 && this.getRandomFirstAlive(this.huts) != undefined){
                 
 
                 this.house = this.getRandomFirstAlive(this.huts)

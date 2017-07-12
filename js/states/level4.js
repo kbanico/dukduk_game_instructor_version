@@ -12,7 +12,8 @@ Level4 = {
         //this.game.camera.follow(this.spider)
         this.game.physics.arcade.enable(this.spider)
         this.spider.body.allowGravity = false;
-        this.spider.body.setSize(150,150,220,380)
+        this.spider.body.setSize(150,150,220,380);
+        this.spider.health = 100;
         
                          
         this.huts = this.game.add.group();
@@ -71,7 +72,44 @@ Level4 = {
         circles.lineStyle(5, 0x0000ff);
         circles.drawCircle(0, 0, 150);
         
-        this.spider.addChild(circles)
+        var circleTween = game.add.tween(circles).to({alpha:0})
+        circleTween.yoyo(true).loop()
+        circleTween.start()
+        
+        this.spider.addChild(circles);
+        
+        //health bar
+        this.bmd = game.add.bitmapData(200,40);
+        this.bmd.ctx.beginPath();
+        this.bmd.ctx.rect(0,0,180,30)
+        this.bmd.ctx.fillStyle = "#00685e";
+        this.bmd.ctx.fill();
+        this.healthBar = game.add.sprite(game.world.centerX-100,game.world.centerY,this.bmd)
+        this.healthBar.anchor.y = 0.5;
+        
+        
+        
+        
+        
+        
+   
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
 
@@ -188,10 +226,28 @@ Level4 = {
         bullet.outOfBoundsKill = true;
         
     },
-    render:function(){
+    hitSpider:function(bullet,spider){
+        bullet.kill();
+        spider.health-=1;
+        barWidth = this.healthBar.width;
+        this.healthBar.width = barWidth - barWidth/spider.health
+        
+    }
+    /*render:function(){
         this.game.debug.body(this.house1)
         this.game.debug.body(this.house2)
         this.game.debug.body(this.spider)
 
-    }
+    }*/
 }
+
+
+
+ /*    	
+    
+    update: function() {
+     barWidth = healthBar.width;
+     LIFE = 40;
+     healthBar.width = barWidth - barWidth/LIFE;
+    },*/
+        

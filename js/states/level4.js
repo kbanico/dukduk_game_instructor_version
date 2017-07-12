@@ -12,8 +12,8 @@ Level4 = {
         //this.game.camera.follow(this.spider)
         this.game.physics.arcade.enable(this.spider)
         this.spider.body.allowGravity = false;
-        this.spider.body.setSize(150,150,220,380);
-        this.spider.health = 100;
+        this.spider.body.setSize(150,150,220,350);
+        this.spider.health = 500;
         
                          
         this.huts = this.game.add.group();
@@ -57,9 +57,7 @@ Level4 = {
         this.bullets = this.game.add.group();
         this.bullets.enableBody = true;
         this.nextBullet = 0;
-        
-        this.fireBullet();
-        
+                
         // add a new graphics object at the center of the world
         var circles = game.add.graphics(this.spider.x-120, this.spider.y);
         // add first 1px wide unfilled red circle with a radius of 50 at the center (0, 0) of the graphics object
@@ -84,37 +82,18 @@ Level4 = {
         this.bmd.ctx.rect(0,0,180,30)
         this.bmd.ctx.fillStyle = "#00685e";
         this.bmd.ctx.fill();
-        this.healthBar = game.add.sprite(game.world.centerX-100,game.world.centerY,this.bmd)
+        this.healthBar = game.add.sprite(-100,game.world.centerY-600,this.bmd)
         this.healthBar.anchor.y = 0.5;
         
+        this.spider.addChild(this.healthBar)
         
-        
-        
-        
-        
-   
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
         
     },update:function(){
+        
+        //overlaps
+        this.game.physics.arcade.overlap(this.spider,this.bullets,this.hitSpider,null,this)
+        
+        
         //check the count of alive huts
         this.countAlive = 0
         this.huts.forEach(function(e){
@@ -174,6 +153,8 @@ Level4 = {
                    
                 },this)
             }else if(this.countAlive == this.huts.length){
+                //we lose
+                this.spider.body = false;
                 tween3 = game.add.tween(this.spider)
                 tween3.to({x:game.world.centerX,y:game.world.centerY}).start()
                 tween3 = game.add.tween(this.spider.scale).to({x:2,y:2}).start();
@@ -215,7 +196,7 @@ Level4 = {
         if(!bullet){
             bullet = this.game.add.sprite(this.player.x-20,this.player.y-this.player.height,"items","ore_gold.png")
         }else{
-            bullet.reset(this.player.x,this.player.y-this.player.height)
+            bullet.reset(this.player.x-20,this.player.y-this.player.height)
         }
         this.bullets.add(bullet)
         bullet.body.allowGravity = false
@@ -224,21 +205,34 @@ Level4 = {
         // Kill the bullet when out of the world
         bullet.checkWorldBounds = true; 
         bullet.outOfBoundsKill = true;
+        bullet.body.setSize(40,40,bullet.width / 3 + 20,bullet.height / 3 + 10)
         
     },
-    hitSpider:function(bullet,spider){
-        bullet.kill();
-        spider.health-=1;
-        barWidth = this.healthBar.width;
-        this.healthBar.width = barWidth - barWidth/spider.health
+    hitSpider:function(spider,bullet){
+        if(this.spider.health > 0){
+            console.log("hit spider")
+            bullet.kill();
+            this.spider.health -= 1;
+            barWidth = this.healthBar.width;
+            this.healthBar.width = barWidth - barWidth/this.spider.health
+            console.log(this.spider.health)  
+        }else{
+            this.game.time.events.add(3000,function(){
+                console.log("you win")
+            },this)
+        }
         
-    }
-    /*render:function(){
+        
+    },
+    render:function(){
         this.game.debug.body(this.house1)
         this.game.debug.body(this.house2)
         this.game.debug.body(this.spider)
+        this.bullets.forEachAlive(function(element){
+            this.game.debug.body(element)
+        },this);
 
-    }*/
+    }
 }
 
 

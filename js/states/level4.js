@@ -12,6 +12,7 @@ Level4 = {
         //this.game.camera.follow(this.spider)
         this.game.physics.arcade.enable(this.spider)
         this.spider.body.allowGravity = false;
+        this.spider.body.setSize(150,150,220,380)
         
                          
         this.huts = this.game.add.group();
@@ -57,6 +58,22 @@ Level4 = {
         this.nextBullet = 0;
         
         this.fireBullet();
+        
+        // add a new graphics object at the center of the world
+        var circles = game.add.graphics(this.spider.x-120, this.spider.y);
+        // add first 1px wide unfilled red circle with a radius of 50 at the center (0, 0) of the graphics object
+        circles.lineStyle(5, 0xff0000);
+        circles.drawCircle(0, 0, 50);
+        // add the second 1px wide unfilled green circle with a radius of 100
+        circles.lineStyle(5, 0x00ff00);
+        circles.drawCircle(0, 0, 100);
+        // and finally add the third 1px wide unfilled blue circle with a radius of 150
+        circles.lineStyle(5, 0x0000ff);
+        circles.drawCircle(0, 0, 150);
+        
+        this.spider.addChild(circles)
+        
+        
 
         
     },update:function(){

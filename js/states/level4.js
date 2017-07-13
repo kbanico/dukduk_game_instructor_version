@@ -102,8 +102,7 @@ Level4 = {
         
         this.game.time.events.loop(12000,this.newBonus,this);
         
-        //tweens
-        this.spiderTweens = []
+       
         
         
         
@@ -156,7 +155,7 @@ Level4 = {
         var randomTime = Math.floor(Math.random() * 3) * Math.floor(Math.random()) *1000
         if(this.spider.alive){
             this.chance = game.rnd.integerInRange(1,10)
-            var tween1 = this.game.add.tween(this.spider)
+            this.spider.tween1 = this.game.add.tween(this.spider)
             
             if(this.chance <= 2 && this.getRandomFirstAlive(this.huts) != undefined){
                 
@@ -165,47 +164,44 @@ Level4 = {
                 console.log(this.house + "is this.house")
                 this.yPos = this.house.y;
                 this.xPos = this.house.x
-                tween1.to({x:this.xPos,y:this.yPos},game.rnd.integerInRange(1,3) * 1000)
-                tween1.start()
-                tween1.onComplete.addOnce(function(){
+                this.spider.tween1.to({x:this.xPos,y:this.yPos},game.rnd.integerInRange(1,3) * 1000)
+                this.spider.tween1.start()
+                this.spider.tween1.onComplete.addOnce(function(){
                     var newHouse = game.add.sprite(this.house.x,this.house.y,"hut");
                     this.house.kill();
                     newHouse.scale.setTo(0.1)
                     newHouse.x = game.rnd.integerInRange(this.spider.x-450, this.spider.x -200)
                     newHouse.y = this.spider.y - 600
                     this.spider.addChild(newHouse)
-                    tween1.to({y:0}).start();
-                    this.spiderTweens.push(tween1)
-                    tween1.onComplete.addOnce(this.performTween,this)
+                    this.spider.tween1.to({y:0}).start();
+                    this.spider.tween1.onComplete.addOnce(this.performTween,this)
                     
                    
                 },this)
             }else if(this.countAlive == this.huts.length){
                 //we lose
                 this.spider.body = false;
-                tween3 = game.add.tween(this.spider)
-                this.spiderTweens.push(tween3)
-                tween3.to({x:game.world.centerX,y:game.world.centerY}).start()
-                tween3 = game.add.tween(this.spider.scale).to({x:2,y:2}).start();
-                tween3.onComplete.addOnce(function(){
+                this.spider.tween3 = game.add.tween(this.spider)
+                this.spider.tween3.to({x:game.world.centerX,y:game.world.centerY}).start()
+                this.spider.tween3 = game.add.tween(this.spider.scale).to({x:2,y:2}).start();
+                this.spider.tween3.onComplete.addOnce(function(){
                     game.time.events.add(3000,function(){game.state.restart();})
                 },this)
                 
                 
             }
             else{
-                tween2 = this.game.add.tween(this.spider)
+                this.spider.tween2 = this.game.add.tween(this.spider)
                 
                 for(var i = 0; i < 3; i++){
-                    tween2.to({y:game.rnd.integerInRange(50,400)},randomTime)
-                    tween2.to({x:game.rnd.integerInRange(0,game.width-(this.spider.width / 2))},randomTime)
-                    tween2.to({x:game.rnd.integerInRange(0,game.width-(this.spider.width / 2)),y:100},randomTime)
+                    this.spider.tween2.to({y:game.rnd.integerInRange(50,400)},randomTime)
+                    this.spider.tween2.to({x:game.rnd.integerInRange(0,game.width-(this.spider.width / 2))},randomTime)
+                    this.spider.tween2.to({x:game.rnd.integerInRange(0,game.width-(this.spider.width / 2)),y:100},randomTime)
                     
                 }
                 
-                tween2.start();
-                this.spiderTweens.push(tween2)
-                tween2.onComplete.addOnce(this.performTween,this)
+                this.spider.tween2.start();
+                this.spider.tween2.onComplete.addOnce(this.performTween,this)
                 
                 
             }
@@ -254,11 +250,19 @@ Level4 = {
             //remove physics
             this.spider.body = false;
             //remove any tweens
-            this.spiderTweens.forEach(function(tween){
-                tween.stop();
-            },this)
-            var deathTween = game.add.tween(this.spider).to({angle: "+180"},850,Phaser.Easing.Linear.None,true,100).to({y:game.world.height - this.spider.height},850,Phaser.Easing.Linear.None,true,100)
+            if(this.spider.tween1){
+                this.spider.tween1.stop();
+           } 
+            if(this.spider.tween2){
+                this.spider.tween2.stop();
+           } 
+            if(this.spider.tween3){
+                this.spider.tween3.stop();
+           }
+            var deathTween = game.add.tween(this.spider).to({angle: "+180"},850,Phaser.Easing.Linear.None).to({y:game.world.height-100}).to({y:game.world.height - 150}).to({y:game.world.height-100}).start();
             this.game.time.events.add(3000,function(){
+                var goodJob = this.game.add.sprite(this.game.world.centerX,this.game.world.centerY,"goodjob")
+                goodJob.anchor.setTo(0.5)
                 console.log("you win")
             },this)
         }
@@ -282,6 +286,7 @@ Level4 = {
             bonus.reset(game.rnd.integerInRange(20,game.width - 50),0)
         }
         this.bonuses.add(bonus)
+        bonus.scale.setTo(0.5)
         bonus.body.allowGravity = false
         bonus.body.velocity.y = 100;
         bonus.anchor.setTo(0.5)
@@ -300,13 +305,3 @@ Level4 = {
     
 }
 
-
-
- /*    	
-    
-    update: function() {
-     barWidth = healthBar.width;
-     LIFE = 40;
-     healthBar.width = barWidth - barWidth/LIFE;
-    },*/
-        

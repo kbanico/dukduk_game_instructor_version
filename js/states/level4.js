@@ -13,7 +13,7 @@ Level4 = {
         this.game.physics.arcade.enable(this.spider)
         this.spider.body.allowGravity = false;
         this.spider.body.setSize(150,150,220,350);
-        this.spider.health = 400;
+        this.spider.health = 1;
         
                          
         this.huts = this.game.add.group();
@@ -100,7 +100,10 @@ Level4 = {
         this.bonuses.enableBody = true;
         this.bonus = 1;
         
-        this.game.time.events.loop(12000,this.newBonus,this)
+        this.game.time.events.loop(12000,this.newBonus,this);
+        
+        //tweens
+        this.spiderTweens = []
         
         
         
@@ -154,6 +157,7 @@ Level4 = {
         if(this.spider.alive){
             this.chance = game.rnd.integerInRange(1,10)
             var tween1 = this.game.add.tween(this.spider)
+            
             if(this.chance <= 2 && this.getRandomFirstAlive(this.huts) != undefined){
                 
 
@@ -171,13 +175,16 @@ Level4 = {
                     newHouse.y = this.spider.y - 600
                     this.spider.addChild(newHouse)
                     tween1.to({y:0}).start();
+                    this.spiderTweens.push(tween1)
                     tween1.onComplete.addOnce(this.performTween,this)
+                    
                    
                 },this)
             }else if(this.countAlive == this.huts.length){
                 //we lose
                 this.spider.body = false;
                 tween3 = game.add.tween(this.spider)
+                this.spiderTweens.push(tween3)
                 tween3.to({x:game.world.centerX,y:game.world.centerY}).start()
                 tween3 = game.add.tween(this.spider.scale).to({x:2,y:2}).start();
                 tween3.onComplete.addOnce(function(){
@@ -188,13 +195,18 @@ Level4 = {
             }
             else{
                 tween2 = this.game.add.tween(this.spider)
+                
                 for(var i = 0; i < 3; i++){
                     tween2.to({y:game.rnd.integerInRange(50,400)},randomTime)
                     tween2.to({x:game.rnd.integerInRange(0,game.width-(this.spider.width / 2))},randomTime)
                     tween2.to({x:game.rnd.integerInRange(0,game.width-(this.spider.width / 2)),y:100},randomTime)
+                    
                 }
+                
                 tween2.start();
+                this.spiderTweens.push(tween2)
                 tween2.onComplete.addOnce(this.performTween,this)
+                
                 
             }
         }
@@ -239,6 +251,13 @@ Level4 = {
             this.healthBar.width = barWidth - barWidth/this.spider.health
             console.log(this.spider.health)  
         }else{
+            //remove physics
+            this.spider.body = false;
+            //remove any tweens
+            this.spiderTweens.forEach(function(tween){
+                tween.stop();
+            },this)
+            var deathTween = game.add.tween(this.spider).to({angle: "+180"},850,Phaser.Easing.Linear.None,true,100).to({y:game.world.height - this.spider.height},850,Phaser.Easing.Linear.None,true,100)
             this.game.time.events.add(3000,function(){
                 console.log("you win")
             },this)

@@ -13,7 +13,7 @@ Level4 = {
         this.game.physics.arcade.enable(this.spider)
         this.spider.body.allowGravity = false;
         this.spider.body.setSize(150,150,220,350);
-        this.spider.health = 500;
+        this.spider.health = 400;
         
                          
         this.huts = this.game.add.group();
@@ -87,12 +87,28 @@ Level4 = {
         
         this.spider.addChild(this.healthBar)
         
+        //bonus
+        this.bmd2 = game.add.bitmapData(200,40);
+        this.bmd2.ctx.beginPath();
+        this.bmd2.ctx.rect(0,0,180,30)
+        this.bmd2.ctx.fillStyle= "#800080"
+        this.bmd2.ctx.fill();
+        
+        this.bonusBar = game.add.sprite(game.world.centerX,20,this.bmd2)
+        this.bonusBar.scale.setTo(0,1)
+        this.bonuses = this.game.add.group();
+        this.bonuses.enableBody = true;
+        this.bonus = 1;
+        
+        this.game.time.events.loop(12000,this.newBonus,this)
+        
+        
         
     },update:function(){
         
         //overlaps
         this.game.physics.arcade.overlap(this.spider,this.bullets,this.hitSpider,null,this)
-        
+        this.game.physics.arcade.overlap(this.player,this.bonuses,this.takeBonus,null,this)
         
         //check the count of alive huts
         this.countAlive = 0
@@ -120,8 +136,14 @@ Level4 = {
         
         //the bullet
         if(this.cursors.up.isDown && this.game.time.now > this.nextBullet){
-            this.nextBullet = this.game.time.now + 200
+            
             this.fireBullet();
+            if(this.bonus != 1){
+                this.nextBullet = game.time.now + 15;
+                
+            }else{
+               this.nextBullet = this.game.time.now + 200; 
+            }
         }
 
     
@@ -132,7 +154,7 @@ Level4 = {
         if(this.spider.alive){
             this.chance = game.rnd.integerInRange(1,10)
             var tween1 = this.game.add.tween(this.spider)
-            if(this.chance <=2 && this.getRandomFirstAlive(this.huts) != undefined){
+            if(this.chance <= 2 && this.getRandomFirstAlive(this.huts) != undefined){
                 
 
                 this.house = this.getRandomFirstAlive(this.huts)
@@ -205,7 +227,7 @@ Level4 = {
         // Kill the bullet when out of the world
         bullet.checkWorldBounds = true; 
         bullet.outOfBoundsKill = true;
-        bullet.body.setSize(40,40,bullet.width / 3 + 20,bullet.height / 3 + 10)
+        bullet.body.setSize(50,50,bullet.width / 3 + 20,bullet.height / 3 + 10)
         
     },
     hitSpider:function(spider,bullet){
@@ -225,14 +247,38 @@ Level4 = {
         
     },
     render:function(){
-        this.game.debug.body(this.house1)
+        /*this.game.debug.body(this.house1)
         this.game.debug.body(this.house2)
         this.game.debug.body(this.spider)
         this.bullets.forEachAlive(function(element){
             this.game.debug.body(element)
-        },this);
+        },this);*/
 
+    },
+    newBonus:function(){
+        var bonus = this.bonuses.getFirstDead();
+        if(!bonus){
+            bonus = game.add.sprite(game.rnd.integerInRange(20,game.width - 50),0,"items","apple.png");
+        }else{
+            bonus.reset(game.rnd.integerInRange(20,game.width - 50),0)
+        }
+        this.bonuses.add(bonus)
+        bonus.body.allowGravity = false
+        bonus.body.velocity.y = 100;
+        bonus.anchor.setTo(0.5)
+        bonus.checkWorldBounds = true;  
+        bonus.outOfBoundsKill = true; 
+    },
+    takeBonus:function(player,bonus){
+        this.bonus+=1;
+        bonus.kill();
+        this.bonusBar.scale.setTo(1,1)
+        game.add.tween(this.bonusBar.scale).to({x:0},4000).start();
+        game.time.events.add(4000,function(){
+            this.bonus = 1;
+        },this)
     }
+    
 }
 
 

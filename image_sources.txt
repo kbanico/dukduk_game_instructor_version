@@ -1,0 +1,8 @@
+beach background
+https://opengameart.org/sites/default/files/Menu_4.png
+
+tilesets
+https://kenney.nl/assets/voxel-pack
+
+platformer pack
+https://opengameart.org/content/platform-pack

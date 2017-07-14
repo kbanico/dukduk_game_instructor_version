@@ -5,7 +5,9 @@ Level4 = {
     create:function(){
          
 
-        this.background = this.game.stage.backgroundColor = '#f0fffd'
+        this.background = this.game.add.sprite(0,0,"beach")
+        this.background.width = this.game.width;
+        this.background.height = this.game.height;
         this.spider = this.game.add.sprite(100,100,"spider")
         this.spider.scale.setTo(0.3)
         this.spider.anchor.setTo(0.5)
@@ -13,7 +15,9 @@ Level4 = {
         this.game.physics.arcade.enable(this.spider)
         this.spider.body.allowGravity = false;
         this.spider.body.setSize(150,150,220,350);
-        this.spider.health = 1;
+        this.spider.health = 400;
+        /*this.spider.animations.add("walking",[0,1],1,true)
+        this.spider.animations.play("walking")*/
         
                          
         this.huts = this.game.add.group();
@@ -102,7 +106,10 @@ Level4 = {
         
         this.game.time.events.loop(12000,this.newBonus,this);
         
-       
+        this.questText = game.add.text(20,20,"Defeat The Spider Before He Steals The Huts",{font:"20px Arial",fill:"#fff"})
+        game.time.events.add(5000,function(){
+            this.questText.visible = false;
+        },this)
         
         
         
@@ -183,7 +190,10 @@ Level4 = {
                 this.spider.body = false;
                 this.spider.tween3 = game.add.tween(this.spider)
                 this.spider.tween3.to({x:game.world.centerX,y:game.world.centerY}).start()
-                this.spider.tween3 = game.add.tween(this.spider.scale).to({x:2,y:2}).start();
+                this.spider.tween3.onComplete.addOnce(function(){
+                    this.spider.tween3 = game.add.tween(this.spider.scale).to({x:2,y:2}).start();
+                },this)
+                
                 this.spider.tween3.onComplete.addOnce(function(){
                     game.time.events.add(3000,function(){game.state.restart();})
                 },this)
@@ -260,10 +270,16 @@ Level4 = {
                 this.spider.tween3.stop();
            }
             var deathTween = game.add.tween(this.spider).to({angle: "+180"},850,Phaser.Easing.Linear.None).to({y:game.world.height-100}).to({y:game.world.height - 150}).to({y:game.world.height-100}).start();
+            //this.spider.animations.stop()
             this.game.time.events.add(3000,function(){
                 var goodJob = this.game.add.sprite(this.game.world.centerX,this.game.world.centerY,"goodjob")
                 goodJob.anchor.setTo(0.5)
                 console.log("you win")
+            },this);
+            
+            //restart
+            game.time.events.add(5000,function(){
+                game.state.restart();
             },this)
         }
         

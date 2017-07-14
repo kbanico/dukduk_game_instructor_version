@@ -31,6 +31,7 @@ var PreloadState = {
         this.game.load.image("baddie","assets/bad_guy.png")
         this.game.load.image("heart","assets/heart.png")
         this.game.load.spritesheet("spider","assets/spider1.png",605,650)
+        this.game.load.image("beach","assets/beach2.png")
     
          //sounds
           

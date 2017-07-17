@@ -110,7 +110,7 @@ var Level3={
         this.game.physics.arcade.overlap(this.sword,this.baddies,null,this.hitEnemies,this)
         this.game.physics.arcade.overlap(this.player,this.shellsGroup,null,this.collectShells,this)
         this.game.physics.arcade.overlap(this.player,this.baddies,null,this.playerHit,this)
-        
+        this.game.physics.arcade.overlap(this.player,this.house,null,this.touchedHouse,this)
         this.player.body.velocity.x = 0;
         this.player.body.velocity.y = 0;
         if (this.cursors.up.isDown)
@@ -165,6 +165,8 @@ var Level3={
         if(this.shellColleted==1){
             //add the door
             this.house = game.add.sprite(7430,775,"hut")
+            this.physics.arcade.enable(this.house)
+            this.house.body.allowGravity = false
             this.house.scale.setTo(0.5)
             this.game.camera.follow(null)
             var tween = this.game.add.tween(this.game.camera).to({x:this.house.x,y:this.house.y},2000,Phaser.Easing.Quadratic.InOut,true)
@@ -197,5 +199,10 @@ var Level3={
     },
     render:function(){
         //this.game.debug.body(this.sword)
+    },
+      touchedHouse:function(player,house){
+        console.log("YO")
+        this.game.state.start("Level4")
     }
+   
 }

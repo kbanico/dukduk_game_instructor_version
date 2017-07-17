@@ -15,7 +15,7 @@ Level4 = {
         this.game.physics.arcade.enable(this.spider)
         this.spider.body.allowGravity = false;
         this.spider.body.setSize(150,150,220,350);
-        this.spider.health = 400;
+        this.spider.health = 200;
         /*this.spider.animations.add("walking",[0,1],1,true)
         this.spider.animations.play("walking")*/
         
@@ -110,6 +110,10 @@ Level4 = {
         game.time.events.add(5000,function(){
             this.questText.visible = false;
         },this)
+        
+        //sounds
+        this.dukduk = game.add.audio("drill")
+
         
         
         
@@ -246,6 +250,11 @@ Level4 = {
         bullet.checkWorldBounds = true; 
         bullet.outOfBoundsKill = true;
         bullet.body.setSize(50,50,bullet.width / 3 + 20,bullet.height / 3 + 10)
+        //will only play the duk duk sound with single bullets
+        if(this.bonus === 1){
+            this.dukduk.play();
+        }
+        
         
     },
     hitSpider:function(spider,bullet){

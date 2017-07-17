@@ -21,7 +21,7 @@ var getGameLandscapeDimensions = function(max_w,max_h){
 }
 
 
-var dim = getGameLandscapeDimensions(768,960);
+var dim = getGameLandscapeDimensions(640,360);
 
 
 //scale ratio

@@ -30,7 +30,7 @@ var scaleRatio = window.devicePixelRatio / 1.5;
 
 //move player function
 var movePlayer = function(player,speed,cursors){
-   if(cursors.left.isDown){
+   if(cursors.left.isDown || player.customProperties.goLeft){
         player.scale.setTo(0.5*-1,0.5)
         player.body.velocity.x = -speed
         player.animations.play("walk")
@@ -40,7 +40,7 @@ var movePlayer = function(player,speed,cursors){
             player.body.velocity.y = -speed;
         }
    }
-   else if(cursors.right.isDown ){
+   else if(cursors.right.isDown || player.customProperties.goRight ){
         player.body.velocity.x = speed
         player.scale.setTo(0.5,0.5)
         player.animations.play("walk")
@@ -50,7 +50,7 @@ var movePlayer = function(player,speed,cursors){
         player.facingLeft = false;
         player.facingRight = true;
         
-    }else if(cursors.up.isDown){
+    }else if(cursors.up.isDown || player.customProperties.mustJump){
         player.body.velocity.y = -speed
         player.animations.play("walk")
     }else{
@@ -70,6 +70,60 @@ function findObjectsByType(targetType,tilemap,layer){
         }
     },this);
     return results;
+}
+
+
+//on screen controls
+function createOnScreenControls(player){
+    this.up= game.add.button(game.width-100,game.height-200,"up")
+    this.down = game.add.button(game.width -100,game.height-100,"down")
+    this.right = game.add.button(200,game.height - 150,"right")
+    this.left = game.add.button(0,game.height - 150,"left")
+    
+    this.up.fixedToCamera = true
+    this.down.fixedToCamera = true
+    this.left.fixedToCamera = true
+    this.right.fixedToCamera = true
+    
+    this.up.events.onInputDown.add(function(){
+        player.customProperties.mustJump = true
+    },this) 
+    
+    this.up.events.onInputUp.add(function(){
+        player.customProperties.mustJump = false
+    },this) 
+    
+    
+    this.left.events.onInputDown.add(function(){
+        console.log("up button touched")
+        player.customProperties.goLeft = true
+    },this) 
+    
+    this.left.events.onInputUp.add(function(){
+        console.log("up button not touched")
+        player.customProperties.goLeft = false
+    },this) 
+    
+    this.right.events.onInputDown.add(function(){
+        console.log("up button touched")
+        player.customProperties.goRight = true
+    },this) 
+    
+    this.right.events.onInputUp.add(function(){
+        console.log("up button not touched")
+        player.customProperties.goRight = false
+    },this) 
+    
+    this.down.events.onInputDown.add(function(){
+        console.log("up button touched")
+        player.customProperties.goDown = true
+    },this) 
+    
+    this.down.events.onInputUp.add(function(){
+        console.log("up button not touched")
+        player.customProperties.goDown = false
+    },this) 
+    
 }
 
 

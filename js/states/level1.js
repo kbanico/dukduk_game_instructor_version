@@ -20,7 +20,7 @@ var Level1 = {
         this.crabLeftOverText = this.game.add.text(20,20,"Find " + this.crabColor+ " duk duk crabs",{font: "30px Arial", fill: "#fff"});
         this.crabLeftOverText.fixedToCamera = true;
         
-        
+        createOnScreenControls(this.player)
        
         
         
@@ -64,6 +64,7 @@ var Level1 = {
         
         this.player.animations.add("walk",[0,1,2,0,1,2],10,true)
         this.player.body.setSize(100,100,20,60)
+        this.player.customProperties = {}
         
         //follow player
         this.game.camera.follow(this.player);
@@ -153,16 +154,16 @@ var Level1 = {
         if(player.canBreakBlocks){
             
 
-            if(this.cursors.down.isDown && player.body.blocked.down){
+            if((this.cursors.down.isDown || this.player.customProperties.goDown ) && player.body.blocked.down){
                 if(block.collideUp){
                     this.destroyBlock(block)
 
                 }
-            }else if(this.cursors.right.isDown && player.body.blocked.right){
+            }else if((this.cursors.right.isDown || this.player.customProperties.goRight ) && player.body.blocked.right){
                 if(block.collideRight){
                     this.destroyBlock(block)
                 }
-            }else if(this.cursors.left.isDown && player.body.blocked.left){
+            }else if((this.cursors.left.isDown || this.player.customProperties.goLeft ) && player.body.blocked.left){
                 if(block.collideLeft){
                     this.destroyBlock(block)
                 }

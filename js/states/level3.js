@@ -24,6 +24,7 @@ var Level3={
         this.game.camera.follow(this.player)
         this.player.body.collideWorldBounds = true;
         this.player.body.allowGravity = false;
+        this.player.customProperties = {};
         
         //cursor
         this.cursors = game.input.keyboard.createCursorKeys();
@@ -50,7 +51,7 @@ var Level3={
         
         //add enemies
         this.baddies = this.game.add.group();
-        for(var i = 0; i < 20; i++){
+        for(var i = 0; i < 10; i++){
             var bad_guy = this.game.add.sprite(game.rnd.integerInRange(0,130 * 60),game.rnd.integerInRange(0,130*15),"baddie")
             bad_guy.scale.setTo(0.15)
             this.game.physics.arcade.enable(bad_guy);
@@ -97,10 +98,7 @@ var Level3={
         //for the shells
         
         
-        //add a door to fight the boss
-        //this will make us go to another level for boss battle
-        
-        
+        this.createOnScreenControls()
         
         
 
@@ -113,24 +111,24 @@ var Level3={
         this.game.physics.arcade.overlap(this.player,this.house,null,this.touchedHouse,this)
         this.player.body.velocity.x = 0;
         this.player.body.velocity.y = 0;
-        if (this.cursors.up.isDown)
+        if (this.cursors.up.isDown || this.player.customProperties.goUp)
         {
             this.player.body.velocity.y = -300
             //this.player.angle = -90
         }
-        else if (this.cursors.down.isDown)
+        else if (this.cursors.down.isDown || this.player.customProperties.goDown )
         {
             this.player.body.velocity.y = 300
             //this.player.angle = 90
         }
 
-        if (this.cursors.left.isDown)
+        if (this.cursors.left.isDown || this.player.customProperties.goLeft )
         {
             this.player.body.velocity.x = -300;
             this.player.scale.setTo(-1,1)
             //this.player.angle = 0
         }
-        else if (this.cursors.right.isDown)
+        else if (this.cursors.right.isDown || this.player.customProperties.goRight)
         {
             this.player.body.velocity.x = 300;
             this.player.scale.setTo(1,1)
@@ -138,7 +136,7 @@ var Level3={
         }
         
         //show sword
-        if(this.game.input.activePointer.isDown || this.spaceKey.isDown){
+        if(this.player.customProperties.attack || this.spaceKey.isDown){
             this.showSword();
         }else{
             this.hideSword();
@@ -162,7 +160,7 @@ var Level3={
         this.shellColleted++;
         shell.kill();
         this.shellLabel.text = this.shellColleted + " shells collected";
-        if(this.shellColleted==1){
+        if(this.shellColleted==20){
             //add the door
             this.house = game.add.sprite(7430,775,"hut")
             this.physics.arcade.enable(this.house)
@@ -203,6 +201,61 @@ var Level3={
       touchedHouse:function(player,house){
         console.log("YO")
         this.game.state.start("Level4")
+    },
+    createOnScreenControls:function(){
+        this.up = game.add.button(100,game.height - 200,"up")
+        this.down = game.add.button(100,game.height - 100,"down")
+        this.right = game.add.button(200,game.height - 150,"right")
+        this.left = game.add.button(0,game.height - 150,"left")
+        this.a = game.add.button(game.width -150,game.height-120,"a")
+        this.up.fixedToCamera = true
+        this.down.fixedToCamera = true
+        this.left.fixedToCamera = true
+        this.right.fixedToCamera = true
+        this.a.fixedToCamera = true
+        
+         this.up.events.onInputDown.add(function(){
+        this.player.customProperties.goUp = true
+    },this) 
+    
+        this.up.events.onInputUp.add(function(){
+        this.player.customProperties.goUp = false
+    },this) 
+    
+    
+        this.left.events.onInputDown.add(function(){
+        this.player.customProperties.goLeft = true
+    },this) 
+    
+        this.left.events.onInputUp.add(function(){
+        this.player.customProperties.goLeft = false
+    },this) 
+    
+        this.right.events.onInputDown.add(function(){
+        this.player.customProperties.goRight = true
+    },this) 
+    
+        this.right.events.onInputUp.add(function(){
+        this.player.customProperties.goRight = false
+    },this) 
+    
+        this.down.events.onInputDown.add(function(){
+        this.player.customProperties.goDown = true
+    },this) 
+    
+        this.down.events.onInputUp.add(function(){
+        this.player.customProperties.goDown = false
+    },this) 
+        
+        this.a.events.onInputDown.add(function(){
+        this.player.customProperties.attack = true
+    },this) 
+    
+        this.a.events.onInputUp.add(function(){
+        this.player.customProperties.attack = false
+    },this) 
+        
+        
     }
    
 }

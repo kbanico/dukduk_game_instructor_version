@@ -83,7 +83,7 @@ var Level2 = {
             }
         },this);
         
-        if(this.score >= 1){
+        if(this.score >= 50){
             game.time.events.remove(this.animationTime)
             game.time.events.remove( this.showCrabTimer)
             this.goodjobTween.start();

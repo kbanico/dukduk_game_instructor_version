@@ -95,32 +95,26 @@ function createOnScreenControls(player){
     
     
     this.left.events.onInputDown.add(function(){
-        console.log("up button touched")
         player.customProperties.goLeft = true
     },this) 
     
     this.left.events.onInputUp.add(function(){
-        console.log("up button not touched")
         player.customProperties.goLeft = false
     },this) 
     
     this.right.events.onInputDown.add(function(){
-        console.log("up button touched")
         player.customProperties.goRight = true
     },this) 
     
     this.right.events.onInputUp.add(function(){
-        console.log("up button not touched")
         player.customProperties.goRight = false
     },this) 
     
     this.down.events.onInputDown.add(function(){
-        console.log("up button touched")
         player.customProperties.goDown = true
     },this) 
     
     this.down.events.onInputUp.add(function(){
-        console.log("up button not touched")
         player.customProperties.goDown = false
     },this) 
     

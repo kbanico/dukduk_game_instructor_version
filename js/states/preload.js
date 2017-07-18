@@ -38,6 +38,8 @@ var PreloadState = {
         this.game.load.image("down","assets/down.png")
         this.game.load.image("left","assets/left.png")
         this.game.load.image("right","assets/right.png")
+        
+        this.game.load.image("a","assets/a.png")
     
          //sounds
           

@@ -52,6 +52,8 @@ Level4 = {
         this.player.body.collideWorldBounds = true;
         this.player.animations.add("walking",[0,1,2],10,true)
         
+        this.player.customProperties = {}
+        
         
         
         //cursor
@@ -115,7 +117,7 @@ Level4 = {
         this.dukduk = game.add.audio("drill")
 
         
-        
+        this.createOnScreenControls();
         
         
     },update:function(){
@@ -135,12 +137,12 @@ Level4 = {
         //moving player
         
         this.player.body.velocity.x = 0;
-        if(this.cursors.right.isDown){
+        if(this.cursors.right.isDown || this.player.customProperties.goRight){
             this.player.body.velocity.x = 300;
             this.player.scale.setTo(0.3)
             this.player.animations.play("walking")
         }
-        else if(this.cursors.left.isDown){
+        else if(this.cursors.left.isDown || this.player.customProperties.goLeft){
             this.player.body.velocity.x = -300
             this.player.scale.setTo(-0.3,0.3)
             this.player.animations.play("walking")
@@ -149,7 +151,7 @@ Level4 = {
         }
         
         //the bullet
-        if(this.cursors.up.isDown && this.game.time.now > this.nextBullet){
+        if((this.cursors.up.isDown || this.player.customProperties.attack) && this.game.time.now > this.nextBullet){
             
             this.fireBullet();
             if(this.bonus != 1){
@@ -327,6 +329,36 @@ Level4 = {
         game.time.events.add(4000,function(){
             this.bonus = 1;
         },this)
+    },
+    createOnScreenControls:function(){
+        this.right = game.add.button(200,game.height - 150,"right")
+        this.left = game.add.button(0,game.height - 150,"left")
+        this.a = game.add.button(game.width -150,game.height-120,"a")
+        
+        this.left.events.onInputDown.add(function(){
+        this.player.customProperties.goLeft = true
+    },this) 
+    
+        this.left.events.onInputUp.add(function(){
+        this.player.customProperties.goLeft = false
+    },this) 
+    
+        this.right.events.onInputDown.add(function(){
+        this.player.customProperties.goRight = true
+    },this) 
+    
+        this.right.events.onInputUp.add(function(){
+        this.player.customProperties.goRight = false
+    },this) 
+        
+        
+        this.a.events.onInputDown.add(function(){
+        this.player.customProperties.attack = true
+    },this) 
+    
+        this.a.events.onInputUp.add(function(){
+        this.player.customProperties.attack = false
+    },this) 
     }
     
 }

@@ -28,7 +28,7 @@ var PreloadState = {
         this.game.load.image("hut","assets/hut.png")
         
         this.game.load.image("goodjob","assets/goodjob.png")
-        this.game.load.image("baddie","assets/bad_guy.png")
+        //this.game.load.image("baddie","assets/bad_guy.png")
         this.game.load.image("heart","assets/heart.png")
         this.game.load.spritesheet("spider","assets/spider1.png",605,650)
         this.game.load.image("beach","assets/beach2.png")
@@ -40,6 +40,10 @@ var PreloadState = {
         this.game.load.image("right","assets/right.png")
         
         this.game.load.image("a","assets/a.png")
+        this.game.load.image("shell1","assets/shell1.png")
+        this.game.load.image("shell2","assets/shell2.png")
+        this.game.load.image("shell3","assets/shell3.png")
+        this.load.spritesheet('baddie', 'assets/zombie_sheet.png', 30, 50, 3, 1, 2);
     
          //sounds
           

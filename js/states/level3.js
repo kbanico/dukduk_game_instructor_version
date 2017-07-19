@@ -41,8 +41,10 @@ var Level3={
         //add shells to the game
         this.shellsGroup = game.add.group()
         this.shellData.forEach(function(shell){
+            random = Math.floor(Math.random()*3) + 1
             //add the sprite
-            var sSprite = this.game.add.sprite(shell.x,shell.y,"items","apple.png");
+            var sSprite = this.game.add.sprite(shell.x,shell.y,"shell" + random);
+            sSprite.scale.setTo(0.3)
             //add physics
             this.game.physics.enable(sSprite);
             sSprite.body.allowGravity = false;
@@ -53,12 +55,15 @@ var Level3={
         this.baddies = this.game.add.group();
         for(var i = 0; i < 10; i++){
             var bad_guy = this.game.add.sprite(game.rnd.integerInRange(0,130 * 60),game.rnd.integerInRange(0,130*15),"baddie")
-            bad_guy.scale.setTo(0.15)
+            bad_guy.scale.setTo(3)
             this.game.physics.arcade.enable(bad_guy);
             bad_guy.body.collideWorldBounds = true;
             bad_guy.body.velocity.setTo(game.rnd.integerInRange(-300,300),game.rnd.integerInRange(-300,300))
             bad_guy.body.bounce.set(1)
-            bad_guy.body.allowGravity = false
+            bad_guy.body.allowGravity = false;
+            bad_guy.animations.add("walking",[0,1,2],8,true);
+            bad_guy.animations.play("walking")
+            
             this.baddies.add(bad_guy)
         }
         
@@ -141,6 +146,22 @@ var Level3={
         }else{
             this.hideSword();
         }
+        
+        
+        
+        this.baddies.forEach(function(zombie){
+            if(zombie.body.velocity.x > 0){
+                zombie.scale.setTo(-3,3)
+            }
+             
+            
+        },this);
+        
+ 
+        
+        
+        
+       
 
     },
     showSword:function(){

@@ -22,7 +22,7 @@ var PreloadState = {
         
         //this.game.load.image("crab","assets/crab.png");
         
-        this.game.load.atlasXML('items', 'assets/spritesheet_items.png', 'assets/spritesheet_items.xml');
+        //this.game.load.atlasXML('items', 'assets/spritesheet_items.png', 'assets/spritesheet_items.xml');
 
         this.game.load.image("environment","assets/Environment.png");
         this.game.load.image("hut","assets/hut.png")
@@ -44,6 +44,8 @@ var PreloadState = {
         this.game.load.image("shell2","assets/shell2.png")
         this.game.load.image("shell3","assets/shell3.png")
         this.load.spritesheet('baddie', 'assets/zombie_sheet.png', 30, 50, 3, 1, 2);
+        this.game.load.image("pickaxe","assets/pickaxe.png")
+        this.game.load.image("sword","assets/sword.png")
     
          //sounds
           
@@ -59,6 +61,6 @@ var PreloadState = {
         
     },
     create:function(){
-        this.game.state.start("Level1");
+        this.game.state.start("Level4");
     }
 }

@@ -44,7 +44,7 @@ Level4 = {
         
         
         //add the player
-        this.player = game.add.sprite(game.world.centerX,game.world.height - 20,"player")
+        this.player = game.add.sprite(game.world.centerX,game.world.height - 30,"player")
         this.player.scale.setTo(0.3);
         this.player.anchor.setTo(0.5)
         this.game.physics.arcade.enable(this.player)
@@ -240,14 +240,15 @@ Level4 = {
     
     fireBullet:function(){
         var bullet = this.bullets.getFirstDead();
+        random = Math.floor(Math.random()*3) + 1
         if(!bullet){
-            bullet = this.game.add.sprite(this.player.x-20,this.player.y-this.player.height,"items","ore_gold.png")
+            bullet = this.game.add.sprite(this.player.x-20,this.player.y-this.player.height,"shell"+random)
         }else{
             bullet.reset(this.player.x-20,this.player.y-this.player.height)
         }
         this.bullets.add(bullet)
         bullet.body.allowGravity = false
-        bullet.scale.setTo(0.5);
+        bullet.scale.setTo(0.13);
         bullet.body.velocity.y = -700;
         // Kill the bullet when out of the world
         bullet.checkWorldBounds = true; 
@@ -308,13 +309,17 @@ Level4 = {
     },
     newBonus:function(){
         var bonus = this.bonuses.getFirstDead();
+        random = Math.floor(Math.random()*3) + 1
         if(!bonus){
-            bonus = game.add.sprite(game.rnd.integerInRange(20,game.width - 50),0,"items","apple.png");
+            bonus = game.add.sprite(game.rnd.integerInRange(20,game.width - 50),0,"shell"+random);
         }else{
             bonus.reset(game.rnd.integerInRange(20,game.width - 50),0)
         }
+        bonus.alpha = 0.1
+        var tween = game.add.tween(bonus)
+        tween.to({alpha:1},800,"Linear",true).loop(true).yoyo(true)
         this.bonuses.add(bonus)
-        bonus.scale.setTo(0.5)
+        bonus.scale.setTo(0.3)
         bonus.body.allowGravity = false
         bonus.body.velocity.y = 100;
         bonus.anchor.setTo(0.5)
@@ -342,12 +347,30 @@ Level4 = {
         this.left.events.onInputUp.add(function(){
         this.player.customProperties.goLeft = false
     },this) 
+        
+        
+        this.left.events.onInputOver.add(function(){
+        this.player.customProperties.goLeft = true
+    },this) 
+    
+        this.left.events.onInputOut.add(function(){
+        this.player.customProperties.goLeft = false
+    },this) 
+        
     
         this.right.events.onInputDown.add(function(){
         this.player.customProperties.goRight = true
     },this) 
     
         this.right.events.onInputUp.add(function(){
+        this.player.customProperties.goRight = false
+    },this) 
+        
+        this.right.events.onInputOver.add(function(){
+        this.player.customProperties.goRight = true
+    },this) 
+    
+        this.right.events.onInputOut.add(function(){
         this.player.customProperties.goRight = false
     },this) 
         
@@ -359,6 +382,17 @@ Level4 = {
         this.a.events.onInputUp.add(function(){
         this.player.customProperties.attack = false
     },this) 
+        
+        
+         this.a.events.onInputOver.add(function(){
+        this.player.customProperties.attack = true
+    },this) 
+    
+        this.a.events.onInputOut.add(function(){
+        this.player.customProperties.attack = false
+    },this) 
+    
+        
     }
     
 }

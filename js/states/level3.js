@@ -68,7 +68,7 @@ var Level3={
         }
         
         //add a sword
-        this.sword= this.player.addChild(game.add.sprite(80,-10,"items","sword_diamond.png"))
+        this.sword= this.player.addChild(game.add.sprite(80,-10,"sword"))
         this.sword.scale.setTo(0.6)
         this.sword.angle = 400;
         this.sword.visible = false;
@@ -235,13 +235,21 @@ var Level3={
         this.right.fixedToCamera = true
         this.a.fixedToCamera = true
         
-         this.up.events.onInputDown.add(function(){
+        this.up.events.onInputDown.add(function(){
         this.player.customProperties.goUp = true
     },this) 
     
         this.up.events.onInputUp.add(function(){
         this.player.customProperties.goUp = false
     },this) 
+        
+        this.up.events.onInputOver.add(function(){
+        this.player.customProperties.goUp = true
+    },this) 
+    
+        this.up.events.onInputOut.add(function(){
+        this.player.customProperties.goUp = false
+    },this)
     
     
         this.left.events.onInputDown.add(function(){
@@ -249,6 +257,14 @@ var Level3={
     },this) 
     
         this.left.events.onInputUp.add(function(){
+        this.player.customProperties.goLeft = false
+    },this) 
+        
+        this.left.events.onInputOver.add(function(){
+        this.player.customProperties.goLeft = true
+    },this) 
+    
+        this.left.events.onInputOut.add(function(){
         this.player.customProperties.goLeft = false
     },this) 
     
@@ -259,6 +275,14 @@ var Level3={
         this.right.events.onInputUp.add(function(){
         this.player.customProperties.goRight = false
     },this) 
+        
+        this.right.events.onInputOver.add(function(){
+        this.player.customProperties.goRight = true
+    },this) 
+    
+        this.right.events.onInputOut.add(function(){
+        this.player.customProperties.goRight = false
+    },this)
     
         this.down.events.onInputDown.add(function(){
         this.player.customProperties.goDown = true
@@ -268,11 +292,27 @@ var Level3={
         this.player.customProperties.goDown = false
     },this) 
         
+        this.down.events.onInputOver.add(function(){
+        this.player.customProperties.goDown = true
+    },this) 
+    
+        this.down.events.onInputOut.add(function(){
+        this.player.customProperties.goDown = false
+    },this) 
+        
         this.a.events.onInputDown.add(function(){
         this.player.customProperties.attack = true
     },this) 
     
         this.a.events.onInputUp.add(function(){
+        this.player.customProperties.attack = false
+    },this) 
+        
+        this.a.events.onInputOver.add(function(){
+        this.player.customProperties.attack = true
+    },this) 
+    
+        this.a.events.onInputOut.add(function(){
         this.player.customProperties.attack = false
     },this) 
         

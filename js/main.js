@@ -75,7 +75,7 @@ function findObjectsByType(targetType,tilemap,layer){
 
 //on screen controls
 function createOnScreenControls(player){
-    this.up= game.add.button(game.width-100,game.height-200,"up")
+    this.up= game.add.button(game.width-100,game.height-250,"up")
     this.down = game.add.button(game.width -100,game.height-100,"down")
     this.right = game.add.button(200,game.height - 150,"right")
     this.left = game.add.button(0,game.height - 150,"left")
@@ -93,12 +93,28 @@ function createOnScreenControls(player){
         player.customProperties.mustJump = false
     },this) 
     
+    this.up.events.onInputOver.add(function(){
+        player.customProperties.mustJump = true
+    },this) 
+    
+    this.up.events.onInputOut.add(function(){
+        player.customProperties.mustJump = false
+    },this) 
+    
     
     this.left.events.onInputDown.add(function(){
         player.customProperties.goLeft = true
     },this) 
     
     this.left.events.onInputUp.add(function(){
+        player.customProperties.goLeft = false
+    },this) 
+    
+    this.left.events.onInputOver.add(function(){
+        player.customProperties.goLeft = true
+    },this) 
+    
+    this.left.events.onInputOut.add(function(){
         player.customProperties.goLeft = false
     },this) 
     
@@ -110,13 +126,29 @@ function createOnScreenControls(player){
         player.customProperties.goRight = false
     },this) 
     
+    this.right.events.onInputOver.add(function(){
+        player.customProperties.goRight = true
+    },this) 
+    
+    this.right.events.onInputOut.add(function(){
+        player.customProperties.goRight = false
+    },this)
+    
     this.down.events.onInputDown.add(function(){
         player.customProperties.goDown = true
     },this) 
     
     this.down.events.onInputUp.add(function(){
         player.customProperties.goDown = false
+    },this)
+    
+    this.down.events.onInputOver.add(function(){
+        player.customProperties.goDown = true
     },this) 
+    
+    this.down.events.onInputOut.add(function(){
+        player.customProperties.goDown = false
+    },this)
     
 }
 

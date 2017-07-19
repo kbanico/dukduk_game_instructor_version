@@ -112,7 +112,7 @@ var Level1 = {
         
         //add the pickaxe
         this.pickaxeData = findObjectsByType("pickaxe",this.map,"objectsLayer");
-        this.pickaxe = this.game.add.sprite(this.pickaxeData[0].x+40,this.pickaxeData[0].y+50,"items","pick_gold.png")
+        this.pickaxe = this.game.add.sprite(this.pickaxeData[0].x+40,this.pickaxeData[0].y+50,"pickaxe")
         this.pickaxe.scale.x=.5;
         this.pickaxe.scale.y=.5;
         this.game.physics.arcade.enable(this.pickaxe);

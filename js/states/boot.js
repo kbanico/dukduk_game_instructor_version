@@ -6,10 +6,13 @@ var BootState = {
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
         
         
+        
         this.scale.pageAlignHorizontally = true;
         this.scale.pageAlignVertically = true;
         
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
+        
+        
     },
     preload:function(){
         this.game.load.image("ibb","assets/ibbturtle.png")

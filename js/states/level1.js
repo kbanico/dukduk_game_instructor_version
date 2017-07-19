@@ -121,7 +121,7 @@ var Level1 = {
         
         
         //add the hut
-        this.hut = this.game.add.sprite(this.game.world.x +1200,this.game.world.centerY-340,"hut")
+        this.hut = this.game.add.sprite(1200,this.game.world.centerY-340,"hut")
         this.hut.scale.setTo(.45);
         this.game.physics.arcade.enable(this.hut)
         this.hut.body.allowGravity = false;
@@ -254,7 +254,7 @@ var Level1 = {
             hut.body.enable = false
             console.log("YOYOYO")
             for(var i = 0; i < 5; i++){
-                var crab = this.game.add.sprite((i  * 50) + hut.x*0.8,hut.y,"crab");
+                var crab = this.game.add.sprite((i  * 50) + hut.x*0.8,hut.y+100,"crab");
                 crab.scale.setTo(0.2);
                 crab.alpha = 0;
                 crab.frame = this.colorToBePicked;
@@ -263,7 +263,7 @@ var Level1 = {
             }
             tween.onComplete.add(function(){
                 this.swingAxe.stop();
-                var goodJobSprite = game.add.sprite(this.player.x,this.player.y,"goodjob")
+                var goodJobSprite = game.add.sprite(this.player.x-100,this.player.y-100,"goodjob")
                 this.player.body.enable = false;
                 
                 game.time.events.add(2000,function(){this.game.state.start("Level2")},this)

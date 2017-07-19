@@ -122,7 +122,8 @@ function createOnScreenControls(player){
 
 
 
-var game = new Phaser.Game(dim.x,dim.y, Phaser.AUTO);
+var game = new Phaser.Game(dim.x,dim.y, Phaser.CANVAS);
+//var game = new Phaser.Game(640,360, Phaser.CANVAS);
 game.state.add("Boot", BootState);
 game.state.add("Preload", PreloadState);
 game.state.add("Level1", Level1)

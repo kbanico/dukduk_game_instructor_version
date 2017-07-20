@@ -21,6 +21,7 @@ var Level3={
         this.player = game.add.sprite(100,100,"player")
         this.game.physics.arcade.enable(this.player)
         this.player.anchor.setTo(0.5)
+        this.player.scale.setTo(0.5)
         this.game.camera.follow(this.player)
         this.player.body.collideWorldBounds = true;
         this.player.body.allowGravity = false;
@@ -44,7 +45,7 @@ var Level3={
             random = Math.floor(Math.random()*3) + 1
             //add the sprite
             var sSprite = this.game.add.sprite(shell.x,shell.y,"shell" + random);
-            sSprite.scale.setTo(0.3)
+            sSprite.scale.setTo(0.2)
             //add physics
             this.game.physics.enable(sSprite);
             sSprite.body.allowGravity = false;
@@ -82,20 +83,24 @@ var Level3={
         
         
         //text for the object of the game
-        this.questText = game.add.text(20,20,"Collect 20 shells then a door will appear")
+        this.questText = game.add.text(20,60,"Collect 20 shells then a door will appear")
         this.shellColleted = 0;
-        this.shellLabel = game.add.text(20,60,this.shellColleted + " shells collected")
+        this.shellLabel = game.add.text(20,20,this.shellColleted + " shells collected")
         
         this.questText.fixedToCamera = true;
         this.shellLabel.fixedToCamera = true;
+        
+        this.game.time.events.add(5000,function(){
+            this.questText.kill()
+        },this)
         
         
         //add a life bar
         this.heartGroup = this.game.add.group()
         for(var i = 0; i < 3; i++){
-            var heart = this.game.add.sprite(600 + (55 * i),50,"heart")
+            var heart = this.game.add.sprite(500 + (55 * i),30,"heart")
             heart.anchor.setTo(0.5)
-            heart.scale.setTo(0.1)
+            heart.scale.setTo(0.09)
             this.heartGroup.add(heart)
         }
         this.heartGroup.fixedToCamera = true;
@@ -130,13 +135,13 @@ var Level3={
         if (this.cursors.left.isDown || this.player.customProperties.goLeft )
         {
             this.player.body.velocity.x = -300;
-            this.player.scale.setTo(-1,1)
+            this.player.scale.setTo(-0.5,0.5)
             //this.player.angle = 0
         }
         else if (this.cursors.right.isDown || this.player.customProperties.goRight)
         {
             this.player.body.velocity.x = 300;
-            this.player.scale.setTo(1,1)
+            this.player.scale.setTo(0.5,0.5)
             //this.player.angle = 0
         }
         

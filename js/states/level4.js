@@ -22,16 +22,16 @@ Level4 = {
                          
         this.huts = this.game.add.group();
         this.huts.enableBody = true;
-        this.house1 = game.add.sprite(100,530,"hut")
+        this.house1 = game.add.sprite(100,300-10,"hut")
         this.house1.scale.setTo(0.1)
         this.huts.add(this.house1)
         
-        this.house2 = game.add.sprite(300,530,"hut")
+        this.house2 = game.add.sprite(300,300-10,"hut")
         this.house2.scale.setTo(0.1)
         this.huts.add(this.house2)
         
         
-        this.house3 = game.add.sprite(500,530,"hut")
+        this.house3 = game.add.sprite(500,300-10,"hut")
         this.house3.scale.setTo(0.1)
         this.huts.add(this.house3)
         
@@ -88,7 +88,7 @@ Level4 = {
         this.bmd.ctx.rect(0,0,180,30)
         this.bmd.ctx.fillStyle = "#00685e";
         this.bmd.ctx.fill();
-        this.healthBar = game.add.sprite(-100,game.world.centerY-600,this.bmd)
+        this.healthBar = game.add.sprite(-100,game.world.centerY-500,this.bmd)
         this.healthBar.anchor.y = 0.5;
         
         this.spider.addChild(this.healthBar)
@@ -171,7 +171,7 @@ Level4 = {
             this.chance = game.rnd.integerInRange(1,10)
             this.spider.tween1 = this.game.add.tween(this.spider)
             
-            if(this.chance <= 2 && this.getRandomFirstAlive(this.huts) != undefined){
+            if(this.chance <= 3 && this.getRandomFirstAlive(this.huts) != undefined){
                 
 
                 this.house = this.getRandomFirstAlive(this.huts)
@@ -212,11 +212,11 @@ Level4 = {
                 this.spider.tween2 = this.game.add.tween(this.spider)
                 
                 for(var i = 0; i < 3; i++){
-                    this.spider.tween2.to({y:game.rnd.integerInRange(50,400)},randomTime)
+                    this.spider.tween2.to({y:game.rnd.integerInRange(50,300)},randomTime)
                     this.spider.tween2.to({x:game.rnd.integerInRange(0,game.width-(this.spider.width / 2))},randomTime)
                     this.spider.tween2.to({x:game.rnd.integerInRange(0,game.width-(this.spider.width / 2)),y:100},randomTime)
                     
-                }
+                }   
                 
                 this.spider.tween2.start();
                 this.spider.tween2.onComplete.addOnce(this.performTween,this)
@@ -257,6 +257,7 @@ Level4 = {
         bullet.body.setSize(50,50,bullet.width / 3 + 20,bullet.height / 3 + 10)
         //will only play the duk duk sound with single bullets
         if(this.bonus === 1){
+            this.dukduk.volume = 0.5
             this.dukduk.play();
         }
         
@@ -321,7 +322,7 @@ Level4 = {
         var tween = game.add.tween(bonus)
         tween.to({alpha:1},800,"Linear",true).loop(true).yoyo(true)
         this.bonuses.add(bonus)
-        bonus.scale.setTo(0.3)
+        bonus.scale.setTo(0.2)
         bonus.body.allowGravity = false
         bonus.body.velocity.y = 100;
         bonus.anchor.setTo(0.5)

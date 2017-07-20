@@ -283,6 +283,7 @@ Level4 = {
             if(this.spider.tween3){
                 this.spider.tween3.stop();
            }
+            this.healthBar.kill();
             var deathTween = game.add.tween(this.spider).to({angle: "+180"},850,Phaser.Easing.Linear.None).to({y:game.world.height-100}).to({y:game.world.height - 150}).to({y:game.world.height-100}).start();
             //this.spider.animations.stop()
             this.game.time.events.add(3000,function(){

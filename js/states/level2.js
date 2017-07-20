@@ -66,9 +66,12 @@ var Level2 = {
         this.goodjob = this.game.add.sprite(game.world.centerX,-200,"goodjob")
         this.goodjob.anchor.setTo(0.5)
         this.goodjobTween = game.add.tween(this.goodjob)
-        this.goodjobTween.to({y:game.world.centerY},800);
+        this.goodjobTween.to({y:this.game.world.centerY},800);
 
+        //timer
         
+        this.timeText = game.add.text(game.width -200,20,"Time Left: " + this.timeLeft,{font:"24px Arial",fill:"#fff"})
+        this.collectText = game.add.text(game.world.centerX,35,"Collect More Than 50 crabs",{font:"24px Arial",fill:"#fff"}).anchor.setTo(0.5)
        
     
     },
@@ -88,7 +91,15 @@ var Level2 = {
             game.time.events.remove( this.showCrabTimer)
             this.goodjobTween.start();
             game.time.events.add(4000,function(){game.state.start("Level3")},this)
+            this.crabGroup.forEachAlive(function(crab){
+                crab.kill();
+            },this)
             
+        }
+        
+         if (this.timeText.visible)
+        {
+            this.timeText.text = "Time : " + (0 + Math.floor(game.time.now / 1000));
         }
 
     },
@@ -160,5 +171,6 @@ var Level2 = {
 //        this.crabGroup.forEachAlive(function(crab){
 //            this.game.debug.body(crab)
 //        },this)
-    }
+    },
+
 }

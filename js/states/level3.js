@@ -149,10 +149,12 @@ var Level3={
         
         
         
-        this.baddies.forEach(function(zombie){
+        this.baddies.forEachAlive(function(zombie){
             if(zombie.body.velocity.x > 0){
-                zombie.scale.setTo(-3,3)
+                zombie.scale.setTo(-3,3)  
             }
+            
+            //zombie.body.velocity.x > 0 ? zombie.scale.setTo(-3,3) : zombie.scale.setTo(3,3)
              
             
         },this);

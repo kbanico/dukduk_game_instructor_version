@@ -32,7 +32,8 @@ var Level2 = {
         this.background.height = game.height
         this.background.width = game.width
         
-        this.positions = [{x:210,y:150},{x:500,y:150},{x:210,y:280},{x:210,y:380},{x:500,y:280},{x:500,y:380}]
+        //this.positions = [{x:210,y:150},{x:500,y:150},{x:210,y:280},{x:210,y:380},{x:500,y:280},{x:500,y:380}]
+        this.positions = [{x:150,y:140},{x:350,y:140},{x:150,y:50},{x:350,y:50},{x:350,y:200},{x:500,y:380}]
 
        
         //crab group
@@ -60,7 +61,7 @@ var Level2 = {
         this.score = 0
         
         //score label
-        this.scoreLabel = game.add.text(20,20,"Score: " + this.score,{font: "25px Arial",fill:"#fff"});
+        this.scoreLabel = game.add.text(20,20,"Score: " + this.score,{font: "18px Arial",fill:"#fff"});
         
         //good job
         this.goodjob = this.game.add.sprite(game.world.centerX,-200,"goodjob")
@@ -70,8 +71,8 @@ var Level2 = {
 
         //timer
         
-        this.timeText = game.add.text(game.width -200,20,"Time Left: " + this.timeLeft,{font:"24px Arial",fill:"#fff"})
-        this.collectText = game.add.text(game.world.centerX,35,"Collect More Than 50 crabs",{font:"24px Arial",fill:"#fff"}).anchor.setTo(0.5)
+        this.timeText = game.add.text(game.width -100,20,"Time Left: " + this.timeLeft,{font:"18px Arial",fill:"#fff"})
+        this.collectText = game.add.text(game.world.centerX,35,"Collect More Than 50 crabs",{font:"18px Arial",fill:"#fff"}).anchor.setTo(0.5)
        
     
     },

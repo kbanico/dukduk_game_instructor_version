@@ -44,7 +44,7 @@ Level4 = {
         
         
         //add the player
-        this.player = game.add.sprite(game.world.centerX,game.world.height - 30,"player")
+        this.player = this.game.add.sprite(this.game.world.centerX,this.game.world.height - 30,"player")
         this.player.scale.setTo(0.3);
         this.player.anchor.setTo(0.5)
         this.game.physics.arcade.enable(this.player)

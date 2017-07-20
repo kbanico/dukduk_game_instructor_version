@@ -59,6 +59,7 @@ var Level3={
             bad_guy.scale.setTo(3)
             this.game.physics.arcade.enable(bad_guy);
             bad_guy.body.collideWorldBounds = true;
+            bad_guy.anchor.setTo(0.5)
             bad_guy.body.velocity.setTo(game.rnd.integerInRange(-300,300),game.rnd.integerInRange(-300,300))
             bad_guy.body.bounce.set(1)
             bad_guy.body.allowGravity = false;
@@ -155,8 +156,14 @@ var Level3={
         
         
         this.baddies.forEachAlive(function(zombie){
-            if(zombie.body.velocity.x > 0){
+            if(this.player.x < zombie.x && ((zombie.y - this.player.y) <= 10)){
+                zombie.scale.setTo(3,3)  
+            }else if(this.player.x > zombie.x && ((zombie.y - this.player.y) <= 10)){
                 zombie.scale.setTo(-3,3)  
+            }else if(zombie.body.velocity.x > 0){
+                zombie.scale.setTo(-3,3)
+            }else{
+                zombie.scale.setTo(3,3)
             }
             
             //zombie.body.velocity.x > 0 ? zombie.scale.setTo(-3,3) : zombie.scale.setTo(3,3)

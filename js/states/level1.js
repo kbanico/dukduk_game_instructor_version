@@ -146,6 +146,21 @@ var Level1 = {
         this.frontGroup = this.game.add.group()
         this.frontGroup.add(this.player)
         this.frontGroup.add(this.pickaxe)
+        
+        this.info = game.add.sprite(game.width / 2,game.height / 2,"level1")
+        this.info.anchor.setTo(0.5)
+        this.info.alpha = 0.9
+        this.info.fixedToCamera = true;
+        this.info.inputEnabled = true;
+        this.info.events.onInputDown.add(function(){
+            this.info.visible = false;
+        },this)
+        
+        game.time.events.add(5000,function(){
+            if(this.info.visible){
+                this.info.visible = false
+            }
+        },this)
     },
     blockCollision:function(player,block){
         //console.log(block.collideUp)

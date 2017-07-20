@@ -224,10 +224,10 @@ var Level3={
         this.game.state.start("Level4")
     },
     createOnScreenControls:function(){
-        this.up = game.add.button(100,game.height - 200,"up")
-        this.down = game.add.button(100,game.height - 100,"down")
-        this.right = game.add.button(200,game.height - 150,"right")
-        this.left = game.add.button(0,game.height - 150,"left")
+        this.up = game.add.button(100,game.height - 270,"up")
+        this.down = game.add.button(100,game.height - 80,"down")
+        this.right = game.add.button(200,game.height - 170,"right")
+        this.left = game.add.button(0,game.height - 170,"left")
         this.a = game.add.button(game.width -150,game.height-120,"a")
         this.up.fixedToCamera = true
         this.down.fixedToCamera = true

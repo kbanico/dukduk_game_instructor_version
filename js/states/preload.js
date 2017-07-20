@@ -46,6 +46,7 @@ var PreloadState = {
         this.load.spritesheet('baddie', 'assets/zombie_sheet.png', 30, 50, 3, 1, 2);
         this.game.load.image("pickaxe","assets/pickaxe.png")
         this.game.load.image("sword","assets/sword.png")
+        this.game.load.image("level1","assets/level1.jpg")
     
          //sounds
           
@@ -61,6 +62,6 @@ var PreloadState = {
         
     },
     create:function(){
-        this.game.state.start("Level4");
+        this.game.state.start("Level1");
     }
 }

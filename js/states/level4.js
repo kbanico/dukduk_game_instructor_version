@@ -199,12 +199,13 @@ Level4 = {
                 this.spider.tween3.to({x:game.world.centerX,y:game.world.centerY}).start()
                 this.spider.tween3.onComplete.addOnce(function(){
                     this.spider.tween3 = game.add.tween(this.spider.scale).to({x:2,y:2}).start();
+                    this.spider.tween3.onComplete.addOnce(function(){
+                        game.time.events.add(3000,function(){game.state.restart();})
+
+                    },this)
                 },this)
                 
-                this.spider.tween3.onComplete.addOnce(function(){
-                    game.time.events.add(3000,function(){game.state.restart();})
-                },this)
-                
+              
                 
             }
             else{

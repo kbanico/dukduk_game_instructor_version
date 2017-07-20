@@ -8,6 +8,8 @@ var PreloadState = {
         this.preloadBg = this.game.add.sprite(game.world.centerX,game.world.centerY,"ibb2");
        
         this.preloadBar = this.game.add.sprite(game.world.centerX,game.world.centerY,"ibb") ;
+        this.preloadBg.anchor.setTo(0.5)
+        this.preloadBar.anchor.setTo(0.5)
         this.load.setPreloadSprite(this.preloadBar);
         
         this.game.load.spritesheet("player","assets/player.png",130,170);
@@ -62,6 +64,6 @@ var PreloadState = {
         
     },
     create:function(){
-        this.game.state.start("Level3");
+        this.game.state.start("Level1");
     }
 }

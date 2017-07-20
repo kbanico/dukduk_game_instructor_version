@@ -339,7 +339,7 @@ Level4 = {
         },this)
     },
     createOnScreenControls:function(){
-        this.right = game.add.button(200,game.height - 150,"right")
+        this.right = game.add.button(100,game.height - 150,"right")
         this.left = game.add.button(0,game.height - 150,"left")
         this.a = game.add.button(game.width -150,game.height-120,"a")
         

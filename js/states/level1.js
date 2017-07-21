@@ -275,6 +275,8 @@ var Level1 = {
                 crab.frame = this.colorToBePicked;
                 var tween = game.add.tween(crab).to({alpha: 1},250,"Linear",false, i * 250).to({y: crab.y - 20},i * 250).start();
                 this.crabLeftOverText.text = ""
+                localStorage.setItem("bestLevel",2)
+                this.level = 2;
             }
             tween.onComplete.add(function(){
                 this.swingAxe.stop();

@@ -195,7 +195,7 @@ var Level3={
         this.shellColleted++;
         shell.kill();
         this.shellLabel.text = this.shellColleted + " shells collected";
-        if(this.shellColleted==20){
+        if(this.shellColleted == 20){
             //add the door
             this.house = game.add.sprite(7430,775,"hut")
             this.physics.arcade.enable(this.house)
@@ -235,7 +235,11 @@ var Level3={
     },
       touchedHouse:function(player,house){
         console.log("YO")
-        this.game.state.start("Level4")
+        localStorage.setItem("bestLevel",4)
+        this.level = 4
+        game.time.events.add(1000,function(){
+            this.game.state.start("Level4")
+        },this)
     },
     createOnScreenControls:function(){
         this.up = game.add.button(100,game.height - 270,"up")

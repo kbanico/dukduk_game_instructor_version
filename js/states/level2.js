@@ -71,8 +71,15 @@ var Level2 = {
 
         //timer
         
-        this.timeText = game.add.text(game.width -100,20,"Time Left: " + this.timeLeft,{font:"18px Arial",fill:"#fff"})
-        this.collectText = game.add.text(game.world.centerX,35,"Collect More Than 50 crabs",{font:"18px Arial",fill:"#fff"}).anchor.setTo(0.5)
+        this.time = 0
+        this.timeText = game.add.text(game.width -100,20,"Time : " + this.time,{font:"18px Arial",fill:"#fff"})
+        this.collectText = game.add.text(game.world.centerX,35,"Collect More Than 50 crabs",{font:"18px Arial",fill:"#fff"})
+        this.collectText.anchor.setTo(0.5)
+        
+        
+        game.time.events.loop(1000,function(){
+            this.timeText.text ="Time : " +  this.time++
+        },this)
        
     
     },
@@ -88,6 +95,8 @@ var Level2 = {
         },this);
         
         if(this.score >= 50){
+            localStorage.setItem("bestLevel",3)
+            this.level = 3
             game.time.events.remove(this.animationTime)
             game.time.events.remove( this.showCrabTimer)
             this.goodjobTween.start();
@@ -98,10 +107,11 @@ var Level2 = {
             
         }
         
-         if (this.timeText.visible)
+        /* if (this.timeText.visible)
         {
-            this.timeText.text = "Time : " + (0 + Math.floor(game.time.now / 1000));
-        }
+            //this.timeText.text = "Time : " + (0 + Math.floor(game.time.now / 1000));
+            this.timeText.text = "Time : " + this.game.time.totalElapsedSeconds();
+        }*/
 
     },
     showRandomCrab:function(){

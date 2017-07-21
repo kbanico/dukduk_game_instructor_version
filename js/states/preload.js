@@ -49,6 +49,9 @@ var PreloadState = {
         this.game.load.image("pickaxe","assets/pickaxe.png")
         this.game.load.image("sword","assets/sword.png")
         this.game.load.image("level1","assets/level1.jpg")
+        this.game.load.image("home","assets/home.png")
+        this.game.load.image("latte","assets/latte.png")
+        this.game.load.image("mainBackground","assets/mainMenu.jpg")
     
          //sounds
           
@@ -64,6 +67,6 @@ var PreloadState = {
         
     },
     create:function(){
-        this.game.state.start("Level1");
+        this.game.state.start("MainMenu");
     }
 }

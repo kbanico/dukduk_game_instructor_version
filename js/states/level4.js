@@ -8,6 +8,12 @@ Level4 = {
         this.background = this.game.add.sprite(0,0,"beach")
         this.background.width = this.game.width;
         this.background.height = this.game.height;
+        
+        
+        
+        
+        
+        
         this.spider = this.game.add.sprite(100,100,"spider")
         this.spider.scale.setTo(0.3)
         this.spider.anchor.setTo(0.5)
@@ -43,16 +49,7 @@ Level4 = {
         this.getRandomFirstAlive(this.huts);
         
         
-        //add the player
-        this.player = this.game.add.sprite(this.game.world.centerX,this.game.world.height - 30,"player")
-        this.player.scale.setTo(0.3);
-        this.player.anchor.setTo(0.5)
-        this.game.physics.arcade.enable(this.player)
-        this.player.body.allowGravity = false;
-        this.player.body.collideWorldBounds = true;
-        this.player.animations.add("walking",[0,1,2],10,true)
         
-        this.player.customProperties = {}
         
         
         
@@ -115,7 +112,17 @@ Level4 = {
         
         //sounds
         this.dukduk = game.add.audio("drill")
-
+        
+        //add the player
+        this.player = this.game.add.sprite(100,330,"player")
+        this.player.scale.setTo(0.3);
+        this.player.anchor.setTo(0.5)
+        this.game.physics.arcade.enable(this.player)
+        this.player.body.allowGravity = false;
+        this.player.body.collideWorldBounds = true;
+        this.player.animations.add("walking",[0,1,2],10,true)
+        
+        this.player.customProperties = {}
         
         this.createOnScreenControls();
         
@@ -295,7 +302,7 @@ Level4 = {
             
             //restart
             game.time.events.add(5000,function(){
-                game.state.restart();
+                game.state.start("MainMenu");
             },this)
         }
         

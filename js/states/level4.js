@@ -9,11 +9,6 @@ Level4 = {
         this.background.width = this.game.width;
         this.background.height = this.game.height;
         
-        
-        
-        
-        
-        
         this.spider = this.game.add.sprite(100,100,"spider")
         this.spider.scale.setTo(0.3)
         this.spider.anchor.setTo(0.5)

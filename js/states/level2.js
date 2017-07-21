@@ -33,7 +33,7 @@ var Level2 = {
         this.background.width = game.width
         
         //this.positions = [{x:210,y:150},{x:500,y:150},{x:210,y:280},{x:210,y:380},{x:500,y:280},{x:500,y:380}]
-        this.positions = [{x:150,y:140},{x:350,y:140},{x:150,y:50},{x:350,y:50},{x:350,y:200},{x:500,y:380}]
+        this.positions = [{x:150,y:140},{x:350,y:140},{x:150,y:50},{x:350,y:50},{x:350,y:200},{x:150,y:200}]
 
        
         //crab group

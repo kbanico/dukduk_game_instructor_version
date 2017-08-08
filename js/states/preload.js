@@ -22,6 +22,11 @@ var PreloadState = {
         this.game.load.image("gameTiles","assets/tileset.png");
         this.game.load.image("minecraftTiles","assets/spritesheet_tiles.png");
         
+        this.game.load.tilemap("level6","assets/levels/level6.json",null,Phaser.Tilemap.TILED_JSON)
+        this.game.load.image("jungleTiles","assets/jungle_spritesheet.png")
+        
+        
+        
         //this.game.load.image("crab","assets/crab.png");
         
         //this.game.load.atlasXML('items', 'assets/spritesheet_items.png', 'assets/spritesheet_items.xml');
@@ -34,6 +39,8 @@ var PreloadState = {
         this.game.load.image("heart","assets/heart.png")
         this.game.load.spritesheet("spider","assets/spider1.png",605,650)
         this.game.load.image("beach","assets/beach2.png")
+        this.game.load.image("spider1","assets/spider.png")
+        this.game.load.image("pig","assets/pig.png")
         
         //controls
         this.game.load.image("up","assets/up.png")
@@ -67,6 +74,6 @@ var PreloadState = {
         
     },
     create:function(){
-        this.game.state.start("MainMenu");
+        this.game.state.start("Level6");
     }
 }

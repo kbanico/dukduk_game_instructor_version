@@ -13,6 +13,20 @@ https://kenney.nl/assets/onscreen-controls
 zombie
 taken from zombies vs veggies zenva module
 
+jungle tileset
+https://opengameart.org/content/2d-platformer-jungle-pack
+2D Platformer Jungle Pack
+by  Tio Aimar (ricardojlsimoes.wixsite.com/home)
+
+------------------------------
+
+License: CC0 1.0 Universal (CC0 1.0)
+https://creativecommons.org/publicdomain/zero/1.0/
+
+Credit "Tio Aimar @ opengameart.org" or simply "Tio Aimar" (this is not mandatory)
+
+
+
 
 hermit crabs made by a friend named ken cruz
 

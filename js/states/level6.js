@@ -19,7 +19,7 @@ var Level6 = {
         this.map.setCollisionBetween(1,30,true,"collisionLayer")
         this.map.setCollisionBetween(1,30,true,"enemyCollisionLayer")
         
-        this.player = new Player(this,5110,1000,"player")
+        this.player = new Player(this,10,1000,"player")
         this.player.scale.setTo(0.7)
         this.game.camera.follow(this.player)
         
@@ -28,6 +28,7 @@ var Level6 = {
         
         //groups
         this.enemies = this.game.add.group()
+        this.bullets = this.game.add.group();
         
         
         
@@ -39,14 +40,45 @@ var Level6 = {
         },this)
         
         
+        this.shootingTime = 0;
+        
         
     },
     update:function(){
         this.game.physics.arcade.collide(this.player,this.collisionLayer)
         this.game.physics.arcade.collide(this.enemies,this.collisionLayer)
         this.game.physics.arcade.collide(this.enemies,this.enemyCollisionLayer)
+        this.game.physics.arcade.overlap(this.enemies,this.bullets,function(enemy,bullet){
+            bullet.kill();
+            enemy.kill();
+            //enemy.damage(0.3)
+        },null,this)
+        this.game.physics.arcade.overlap(this.player,this.enemies,function(player,enemy){
+            player.kill();
+        },null,this)
+        
+        if(this.input.activePointer.isDown && this.game.time.now > this.shootingTime){
+            this.fireBullet(this.player.x,this.player.y - 50);
+            this.shootingTime = this.game.time.now + 500
+        }
         
        
+    },
+    fireBullet:function(x,y){
+        var bullet = this.bullets.getFirstDead()
+        if(!bullet){
+            bullet = new Bullet(this,x,y)
+        }else{
+            bullet.reset(x,y)
+        }
+        bullet.loadTexture("shell" + Math.floor(Math.random() * 3 + 1))
+        if(this.player.scale.x > 0){
+            bullet.body.velocity.x = 400
+        }else{
+            bullet.body.velocity.x = -400
+        }
+        var tween = this.game.add.tween(bullet).to({angle:"+360"},850).start();
+        this.bullets.add(bullet)
     },
     randomVelocity(velocity){
         velocity = Math.floor(Math.random()* velocity + 60);
@@ -120,5 +152,22 @@ Player.prototype.update = function(){
         this.body.velocity.y = -600;
         this.animations.play("walk")
     }  
+};
+
+function Bullet(state,x,y){
+    Phaser.Sprite.call(this,state.game,x,y,"shell" + Math.floor(Math.random() * 3 + 1))
+    this.state = state;
+    this.game = state.game;
+    this.game.physics.arcade.enable(this);
+    this.anchor.setTo(0.5)
+    this.body.gravity.y = 200;
+    this.scale.setTo(0.1)
+    this.checkWorldBounds = true;  
+    this.outOfBoundsKill = true; 
+    
+    
 }
+
+Bullet.prototype = Object.create(Phaser.Sprite.prototype);
+Bullet.prototype.constructor = Bullet;
 

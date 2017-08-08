@@ -76,17 +76,11 @@ Enemy.prototype = Object.create(Phaser.Sprite.prototype);
 Enemy.prototype.constructor = Enemy;
 
 Enemy.prototype.update = function(){
-    if(this.game.time.now > this.timeCounter){
-        prev_x = this.x
-        this.timeCounter = this.game.time.now + 500
-    }
-    
     
     if(this.body.velocity.x > 0){
         this.scale.x = 1
     }
- 
-    else if(this.body.velocity.x < 0 && Math.abs(prev_x - this.x) > 20){
+    else {
         this.scale.x = -1
     }
 }
@@ -125,8 +119,6 @@ Player.prototype.update = function(){
     if(this.state.cursors.up.isDown && this.body.onFloor()){
         this.body.velocity.y = -600;
         this.animations.play("walk")
-    }
-    
-    
+    }  
 }
 

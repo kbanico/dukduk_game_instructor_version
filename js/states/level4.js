@@ -297,7 +297,7 @@ Level4 = {
             
             //restart
             game.time.events.add(5000,function(){
-                game.state.start("MainMenu");
+                game.state.start("Level5");
             },this)
         }
         

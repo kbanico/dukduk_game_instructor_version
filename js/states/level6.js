@@ -57,6 +57,11 @@ var Level6 = {
             player.kill();
         },null,this)
         
+        this.game.physics.arcade.collide(this.bullets,this.collisionLayer,function(bullet,tile){
+            bullet.kill();
+        },null,this)
+        
+        
         if(this.input.activePointer.isDown && this.game.time.now > this.shootingTime){
             this.fireBullet(this.player.x,this.player.y - 50);
             this.shootingTime = this.game.time.now + 500

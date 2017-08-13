@@ -19,7 +19,7 @@ var PreloadState = {
         this.game.load.tilemap("level1","assets/levels/level1.json",null,Phaser.Tilemap.TILED_JSON)
         
         this.game.load.tilemap("level2","assets/levels/level2.json",null,Phaser.Tilemap.TILED_JSON);
-        this.game.load.image("gameTiles","assets/tileset.png");
+        //this.game.load.image("gameTiles","assets/tileset.png");
         this.game.load.image("minecraftTiles","assets/spritesheet_tiles.png");
         
         this.game.load.tilemap("level6","assets/levels/level6.json",null,Phaser.Tilemap.TILED_JSON)
@@ -74,6 +74,6 @@ var PreloadState = {
         
     },
     create:function(){
-        this.game.state.start("Level6");
+        this.game.state.start("Level5");
     }
 }
